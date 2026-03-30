@@ -1,0 +1,143 @@
+\documentclass{article}
+
+%%%%%%%%%%%%%%% LIBRERIAS %%%%%%%%%%%%%%%%%%%%%
+\usepackage[thinc]{esdiff}
+\usepackage{amsmath}
+\usepackage{caption}
+\usepackage{physics}
+\usepackage{titlesec}
+\usepackage{titletoc}
+\usepackage{graphicx}
+\usepackage[spanish,es-tabla]{babel} % 'es-tabla' cambia Cuadro→Tabla
+\usepackage{hyperref}                % cargar después de babel
+\usepackage{float}
+\usepackage{circuitikz}
+\usepackage[left=3cm,right=3cm]{geometry} %para margenes
+\usepackage{subfiles} 
+\usepackage{subcaption}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs} % Para tablas con tematica de paper cientifico
+\usepackage{siunitx}  % Para alinear números en las tablas d:
+
+%%%%%%%%%%%%%%%%%%% VARIABLES %%%%%%%%%%%%%%%%%%%%
+\newcommand{\Facultad}{Instituto Tecnológico \\de\\ Buenos Aires} %constantes
+\newcommand{\TPn}{Trabajo Práctico N° 1}
+\newcommand{\TPtema}{Diseño de Transformadores de Alta Frecuencia}
+\renewcommand{\thesection}{\arabic{section}}          % 2
+\renewcommand{\thesubsection}{\quad \alph{subsection}}   % a
+\renewcommand{\thesubsubsection}{\quad \thesubsection.~\roman{subsubsection}} % a. i
+\graphicspath{{imagenes/}} %para que acceda a las fotos en la carpeta directamente
+
+
+%%%%%%%%%%%%%%%%%% FORMATO TÍTULO Y NUMERACIÓN %%%%%%%%%%%%%%%%%%%
+% Numeración de secciones
+\renewcommand{\thesection}{\arabic{section}.}          
+\renewcommand{\thesubsection}{\thesection\arabic{subsection}}       
+\renewcommand{\thesubsubsection}{$\alph{subsubsection})$}
+
+% Numerar hasta subsubsecciones
+\setcounter{secnumdepth}{3}
+
+% Formato de títulos
+\titleformat{\section}{\Huge\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\LARGE\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\large\bfseries}{\thesubsubsection}{0.5em}{}
+
+
+
+%%%%%%%%%%%%%%%%%%% ARCHIVO %%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+%%%CARATULA%%%
+\begin{titlepage} %creo portada
+
+        \begin{flushleft}
+            \centering
+            \includegraphics[width=0.3\textwidth]{Logo_ITBA.png}
+        \end{flushleft}
+
+        \centering
+            
+        {\scshape\LARGE \Facultad \par} %\par sirve para indicar un final de parrafo
+        \vspace{1cm}                    %esto hace un espacio entre lineas de 1cm
+
+
+        {\huge\bfseries \TPn \par}
+        \vspace{1.5cm}
+        {\Large Tecnología de Materiales Electrónicos\\ 25.12 \par}
+        \vspace{0.5cm}
+        {\Large \TPtema \par}
+        \vfill                      %sirve para rellenar el espacio y quede simétrico.
+        {\Large \bfseries Grupo N° 2 \par}
+        \vspace{1cm}
+        {\large Juan Bautista Correa Uranga \hfill Legajo: 65016 \par} 
+        {\large Juan Ignacio Caorsi \hfill Legajo: 65532  \par}
+        {\large Rita Moschini \hfill Legajo: 67026 \par} 
+        {\large Lucas Solar Grillo \hfill Legajo: 63322\par}
+        \vfill
+        {\large \today\par}
+        \vfill
+
+\end{titlepage}
+
+{\centering \LARGE \bfseries Resumen \par} 
+\par 
+% Aquí puedes incluir un breve resumen de los resultados del diseño del transformador.
+
+\newpage
+
+\tableofcontents 
+\newpage
+
+%%%%%%%%%%%%%%%%%%% CUERPO DEL INFORME %%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introducción y Objetivos}
+En este trabajo de laboratorio se aborda el diseño de un transformador de alta frecuencia utilizado en circuitos tipo fuentes conmutadas, integrando herramientas de IA avanzadas como asistencia al cálculo. El objetivo fundamental es consolidar los conocimientos teóricos de la materia para diseñar el componente a partir de una lista de requerimientos (Grupo 2), garantizando que el flujo magnético máximo no sature el núcleo. Además, se busca analizar críticamente los resultados obtenidos por la IA, justificar técnicamente cada decisión de diseño adoptada y generar una memoria de cálculo completa que culmine con la elaboración del modelo equivalente del transformador, para su posterior ensamble y prueba por parte del grupo ``cliente''.
+
+\section{Especificaciones de Diseño}
+Para el desarrollo de este trabajo práctico, se nos asignaron las siguientes especificaciones correspondientes al Grupo 2:
+\begin{itemize}
+    \item Tensión de entrada ($V_{in}$): 5 V
+    \item Frecuencia ($F$): 75 kHz
+    \item Ciclo de trabajo ($D$): 2/3
+    \item Relación de transformación ($N_2/N_1$): 1.5
+    \item Número de secundarios (\# $N_2$): 3
+    \item Densidad de corriente admisible ($J$): 3 A/mm$^2$
+    \item Corriente continua de magnetización ($IDCN$): 1.1 A $\pm$ 10\%
+\end{itemize}
+Como restricciones físicas de hardware, se debe utilizar un núcleo de ferrite RM10 (material N30 de TDK con $B_{max} = 100 \text{ mT}$) y un carrete plástico de dos secciones, separando el primario de los secundarios.
+
+\section{Memoria de Cálculo}
+% Explicitando todos los modelos utilizados, ecuaciones, supuestos y criterios de selección.
+
+\subsection{Cálculo de Espiras}
+% Justificar el número de espiras del primario y los secundarios garantizando que no haya saturación.
+
+\subsection{Cálculo de Entrehierro}
+% Cálculo del espesor óptimo.
+
+\subsection{Selección de Conductores y Distribución}
+% Consideraciones sobre densidad de corriente, efecto skin, profundidad de penetración y verificación del volumen disponible en el carrete.
+
+\subsection{Cálculo de Inductancias}
+% Estimación de la inductancia de magnetización y de dispersión.
+
+\section{Estimación de Pérdidas}
+% Pérdidas resistivas en el cobre y pérdidas en el núcleo (histéresis y corrientes parásitas).
+
+\section{Modelo Equivalente del Transformador}
+% Presentar el circuito/modelo final con todos los parámetros calculados. 
+% Aquí puedes usar el paquete circuitikz si deseas dibujar el circuito en LaTeX.
+
+\section{Informe Técnico: Análisis y Criterios}
+\subsection{Criterios de Diseño y Alternativas Evaluadas}
+% Justificación del uso de la herramienta de IA, los prompts generados y las decisiones adoptadas frente a posibles alternativas.
+
+\subsection{Análisis de Errores y Desviaciones}
+% Análisis de las posibles desviaciones teóricas y tolerancias en los materiales.
+
+\section{Conclusiones}
+% Conclusiones finales sobre la factibilidad del diseño y la experiencia del uso de IA como herramienta de asistencia.
+
+\end{document}
