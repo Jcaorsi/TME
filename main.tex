@@ -85,6 +85,104 @@
 
 En esta sección se presentan las expresiones fundamentales utilizadas para el dimensionamiento del transformador.
 
+\subsection{Cálculo de $I_{rms}$}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines=middle,
+    xlabel={$t$},
+    ylabel={$i(t)$},
+    xmin=0, xmax=7.5,
+    ymin=0, ymax=5,
+    xtick={0,2,6},
+    xticklabels={$0$,$DT$,$T$},
+    ytick={1.5,3.5},
+    yticklabels={$i_{\min}$,$i_{\max}$},
+    enlargelimits=false,
+    width=12cm,
+    height=6cm,
+    grid=both
+]
+
+% Primer período
+\addplot[thick] coordinates {(0,1.5) (2,3.5)};
+\addplot[thick] coordinates {(2,3.5) (2,0)};
+\addplot[thick] coordinates {(2,0) (6,0)};
+
+% Segundo período
+\addplot[thick] coordinates {(6,1.5) (8,3.5)};
+\addplot[thick] coordinates {(8,3.5) (8,0)};
+
+% Líneas auxiliares
+\addplot[dashed] coordinates {(0,1.5) (6,1.5)};
+\addplot[dashed] coordinates {(0,3.5) (2,3.5)};
+
+\end{axis}
+\end{tikzpicture}
+\caption{Forma de la corriente \(i(t)\).}
+\label{fig:senal_diente_sierra}
+\end{figure}
+Como la corriente de entrada tiene forma de rampa (observar figura \ref{fig:senal_diente_sierra}), la corriente del circuito puede ser descripta por la siguiente ecuación:
+
+\begin{equation*}
+i(t) = i_{min} + (\frac{i_{max}-i_{min}}{DT})\cdot t
+\end{equation*}
+Con $i_{min}$ el valor minimo de la rampa y $i_{max}$ el valor maximo de la rampa.
+
+Es importante aclarar que esta señal converge a esta función dentro del tiempo $t \le DT$. Luego de este tiempo, la señal es 0.
+
+Posteriormente usando la ecuación de valor rms, se plantea:
+
+\begin{equation}
+I_{rms}= \sqrt{\frac{1}{T} \int_{0}^{DT}{i^2 dt}} 
+\label{eq:IRMS}
+\end{equation}
+
+Luego llamese $A= \int_{0}^{DT}{i^2 dt}$ y llamese $b=\frac{i_{max}-i_{min}}{DT}$ . Resolviendo:
+
+\begin{align*}
+    A &=\int_{0}{DT}{(i_{min}+bt)dt}\\
+    &=(i_{min}^2\cdot t + i_{min} \cdot b \cdot t^2 + \frac{b^2 \cdot t^3}{3})\Big|_{0}^{DT}\\
+    &=[i_{min}^2 + i_{min}\cdot (i_{max}-i_{min}) + {(i_{max}-i_{min})}^2]\cdot DT\\
+    &=[i_{max}^2 - i_{max} \cdot i_{min} + i_{min}^2] \cdot DT
+\end{align*}
+
+Finalmente, se remplazando A en la ecuación \ref{eq:IRMS}, se llega a la formula de la corriente eficaz:
+
+\begin{equation}
+I_{rms}=  \sqrt{ [i_{max}^2 - i_{max} \cdot i_{min} + i_{min}^2] \cdot D } 
+\label{eq:IRMSfinal}
+\end{equation}
+
+Por otra parte para conseguir $i_{max}$ e $i_{min}$ se parte de lo siguiente:
+
+\begin{equation*}
+V_{in} = L_{mag} \cdot \frac{\Delta i}{\Delta t}
+\end{equation*}
+Despejando 
+\begin{equation*}
+\Delta i = \frac{V_{in} \cdot \Delta t}{L_{mag}}
+\end{equation*}
+
+Luego busco $I_{dc}$
+\begin{align*}
+    I_{dc} &= \frac{1}{T} \int_{0}^{DT}{(i_{min} + \frac{\Delta i}{DT})dt}\\
+    &= \frac{1}{T} \cdot (i_{min} \cdot t + \frac{\Delta i}{DT} \cdot \frac{t^2}{2}) \Big|_{0}^{DT} \\
+    &= (i_{min} + \frac{\Delta i}{2}) \cdot D
+\end{align*}
+
+Finalmente despejado $i_{min}$ y sumando $\Delta i$ a $i_{min}$  consigo los valores para remplazar en la ecuación \ref{eq:IRMSfinal}:
+
+\begin{equation}
+i_{min}= \frac{I_{dc}}{D} - \frac{\Delta i}{2}
+\end{equation}
+\begin{equation}
+i_{min}= \frac{I_{dc}}{D} + \frac{\Delta i}{2}
+\end{equation}
+
+
 \subsection{Dimensionamiento del Conductor}
 Para determinar la cantidad de conductores en paralelo necesarios para manejar la corriente sin exceder la densidad de corriente permitida:
 \begin{equation} \label{eq:AreaTotal}
@@ -157,7 +255,7 @@ Donde $b$ es el ancho de la sección del bobinado y $h$ la altura del mismo.
 \section{Procedimiento de Cálculo}
 
 \subsection{Selección de Conductores y Vueltas}
-A partir de la $I_{rms}$ calculada y la densidad $J$, se obtiene el área total necesaria de conductor mediante \eqref{eq:AreaTotal}. Sin embargo, la selección 
+A partir de la $I_{rms}$ calculada mediante (\ref{eq:IRMSfinal}) y la densidad $J$, se obtiene el área total necesaria de conductor mediante \eqref{eq:AreaTotal}. Sin embargo, la selección 
 del conductor está sujeta a la frecuencia de conmutación de 75 kHz. Utilizando la profundidad de penetración del efecto Skin($\delta$):
 
 \begin{equation} \label{eq:CalculoSkin}
@@ -167,7 +265,7 @@ del conductor está sujeta a la frecuencia de conmutación de 75 kHz. Utilizando
 Donde $\rho_{Cu(100^\circ C)}$ es la resistividad del cobre a alta temperatura. Para evitar un desaprovechamiento de la sección transversal del conductor, 
 se impone la restricción de que el diámetro del hilo ($d$) no debe superar $2\delta \approx 0,56 \text{ mm}$. 
 
-Al analizar las opciones de diámetro disponibles en el pañol (0,6 mm; 0,45 mm; 0,3 mm; 0,2 mm; 0,05 mm), se selecciona el diámetro de \textbf{0,45 mm}.
+Al analizar las opciones de diámetro disponibles en el pañol (0,6 mm; 0,45 mm), se selecciona el diámetro de \textbf{0,45 mm}.
 
 Utilizando \eqref{eq:CablesParalelo} con el área de este conductor ($A_{cable} \approx 0,159 \text{ mm}^2$), 
 se determina que para el primario se requieren $m=3$ cables en paralelo. 
@@ -194,5 +292,6 @@ P_{core} = \frac{V_{rms}^2}{R_{Fe}} = 290 \text{ mW}
 \end{equation*}
 
 Finalmente, la inductancia de dispersión se estima con \eqref{eq:Ldisp}. Las pérdidas totales del transformador ascienden a \textbf{463 mW}.
+
 
 \end{document}
