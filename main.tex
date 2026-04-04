@@ -81,63 +81,118 @@
 
 \end{titlepage}
 
-{\centering \LARGE \bfseries Resumen \par} 
-\par 
-% Aquí puedes incluir un breve resumen de los resultados del diseño del transformador.
+\section{Marco Teórico}
 
-\newpage
+En esta sección se presentan las expresiones fundamentales utilizadas para el dimensionamiento del transformador.
 
-\tableofcontents 
-\newpage
+\subsection{Dimensionamiento del Conductor}
+Para determinar la cantidad de conductores en paralelo necesarios para manejar la corriente sin exceder la densidad de corriente permitida:
+\begin{equation} \label{eq:AreaTotal}
+A_{Cu,total} = \frac{I_{rms}}{J}
+\end{equation}
+Donde $I_{rms}$ es la corriente eficaz y $J$ es la densidad de corriente de consigna.
 
-%%%%%%%%%%%%%%%%%%% CUERPO DEL INFORME %%%%%%%%%%%%%%%%%%%%%%%%
+\begin{equation} \label{eq:CablesParalelo}
+m = \left\lceil \frac{A_{Cu,total}}{A_{cable}} \right\rceil
+\end{equation}
+Donde $m$ es el número de hilos en paralelo (redondeado al entero superior) y $A_{cable}$ es el área transversal de un único hilo.
 
-\section{Introducción y Objetivos}
-En este trabajo de laboratorio se aborda el diseño de un transformador de alta frecuencia utilizado en circuitos tipo fuentes conmutadas, integrando herramientas de IA avanzadas como asistencia al cálculo. El objetivo fundamental es consolidar los conocimientos teóricos de la materia para diseñar el componente a partir de una lista de requerimientos (Grupo 2), garantizando que el flujo magnético máximo no sature el núcleo. Además, se busca analizar críticamente los resultados obtenidos por la IA, justificar técnicamente cada decisión de diseño adoptada y generar una memoria de cálculo completa que culmine con la elaboración del modelo equivalente del transformador, para su posterior ensamble y prueba por parte del grupo ``cliente''.
+\subsection{Restricciones de Bobinado y Flujo}
+El área neta disponible para el bobinado considerando el factor de ventana $K_w$:
+\begin{equation} \label{eq:Aneta}
+A_{neta} = \frac{A_n}{2} \cdot K_w
+\end{equation}
+Donde $A_n$ es el área de la ventana del núcleo.
 
-\section{Especificaciones de Diseño}
-Para el desarrollo de este trabajo práctico, se nos asignaron las siguientes especificaciones correspondientes al Grupo 2:
+Adicionalmente, en diseños de alta frecuencia, es imperativo considerar el \textbf{efecto skin}. Este fenómeno provoca que la densidad de corriente se concentre en la periferia del conductor, reduciendo su sección efectiva. La profundidad de penetración ($\delta$) está dada por:
+\begin{equation} \label{eq:Skin}
+\delta = \sqrt{\frac{\rho}{\pi \cdot f \cdot \mu}}
+\end{equation}
+Donde $\rho$ es la resistividad del conductor, $f$ la frecuencia de conmutación y $\mu$ la permeabilidad del material. Esta restricción limita el diámetro útil del hilo, ya que si el radio del cable supera a $\delta$, el centro del conductor no transporta corriente, lo que resulta en un desaprovechamiento del área de ventana disponible y un aumento innecesario de las pérdidas por conducción.
+
+La variación de la densidad de flujo magnético ($\Delta B$):
+\begin{equation} \label{eq:DeltaB}
+\Delta B = \frac{V_{in} \cdot D}{N_1 \cdot A_{min} \cdot f}
+\end{equation}
+Donde $V_{in}$ es la tensión de entrada, $D$ el ciclo de trabajo (duty cycle), $N_1$ el número de vueltas del primario, $A_{min}$ el área transversal mínima del núcleo y $f$ la frecuencia de conmutación.
+
+La densidad de flujo de polarización ($B_{bias}$) debida a la componente de continua ($I_{dc}$):
+\begin{equation} \label{eq:Bbias}
+B_{bias} = \frac{\mu_0 \cdot \mu_i \cdot N_1 \cdot I_{dc}}{L_e + \mu_i \cdot l_g}
+\end{equation}
+Donde $\mu_0$ es la permeabilidad del vacío, $\mu_i$ la permeabilidad inicial del material, $L_e$ la longitud del camino magnético y $l_g$ la longitud del entrehierro (gap).
+
+\subsection{Parámetros del Circuito Equivalente}
+Permeabilidad efectiva con entrehierro:
+\begin{equation} \label{eq:MuEf}
+\mu_{ef} = \frac{\mu_i}{1 + \frac{\mu_i \cdot l_g}{L_e}}
+\end{equation}
+
+Inductancia de magnetización:
+\begin{equation} \label{eq:Lmag}
+L_{mag} = \frac{\mu_0 \cdot \mu_{ef} \cdot N_1^2 \cdot A_e}{L_e}
+\end{equation}
+Donde $A_e$ es el área efectiva del núcleo.
+
+Resistencia de los devanados:
+\begin{equation} \label{eq:Rcu}
+R_{Cu} = \frac{\rho_{Cu(100^\circ C)} \cdot L_n \cdot N}{m \cdot A_{cable}}
+\end{equation}
+Donde $\rho_{Cu(100^\circ C)}$ es la resistividad del cobre a $100^\circ C$, $L_n$ es la longitud media de una espira y $N$ el número de vueltas.
+
+Resistencia de pérdidas en el núcleo (Fe):
+\begin{equation} \label{eq:Rfe}
+R_{Fe} = \frac{2\pi f \cdot L_{mag} \cdot \mu_i}{\mu_i^2 \cdot \left( \frac{\tan \delta}{\mu_i} \right)}
+\end{equation}
+Donde $\frac{\tan \delta}{\mu_i}$ es el factor de pérdidas del material evaluado a la frecuencia de trabajo.
+
+Inductancia de dispersión (aproximada):
+\begin{equation} \label{eq:Ldisp}
+L_{disp} \approx \frac{\mu_0 \cdot N_1^2 \cdot L_n}{3} \cdot \frac{b}{h}
+\end{equation}
+Donde $b$ es el ancho de la sección del bobinado y $h$ la altura del mismo.
+
+---
+
+\section{Procedimiento de Cálculo}
+
+\subsection{Selección de Conductores y Vueltas}
+A partir de la $I_{rms}$ calculada y la densidad $J$, se obtiene el área total necesaria de conductor mediante \eqref{eq:AreaTotal}. Sin embargo, la selección 
+del conductor está sujeta a la frecuencia de conmutación de 75 kHz. Utilizando la profundidad de penetración del efecto Skin($\delta$):
+
+\begin{equation} \label{eq:CalculoSkin}
+\delta = \sqrt{\frac{\rho_{Cu(100^\circ C)}}{\pi \cdot f \cdot \mu_0}} \approx 0,28 \text{ mm}
+\end{equation}
+
+Donde $\rho_{Cu(100^\circ C)}$ es la resistividad del cobre a alta temperatura. Para evitar un desaprovechamiento de la sección transversal del conductor, 
+se impone la restricción de que el diámetro del hilo ($d$) no debe superar $2\delta \approx 0,56 \text{ mm}$. 
+
+Al analizar las opciones de diámetro disponibles en el pañol (0,6 mm; 0,45 mm; 0,3 mm; 0,2 mm; 0,05 mm), se selecciona el diámetro de \textbf{0,45 mm}.
+
+Utilizando \eqref{eq:CablesParalelo} con el área de este conductor ($A_{cable} \approx 0,159 \text{ mm}^2$), 
+se determina que para el primario se requieren $m=3$ cables en paralelo. 
+
+Considerando $A_n = 39 \text{ mm}^2$ y un factor de ventana $K_w = 0,37$, el área neta disponible según \eqref{eq:Aneta} limita la cantidad de vueltas. Para cumplir la relación de transformación $n_2/n_1 = 1,5$ y las restricciones físicas, se analizan las opciones (8:12, 4:6, 2:3, 10:15). Se selecciona el par \textbf{N1=10 y N2=15} por ser el único compatible con los límites de saturación y bidireccionalidad.
+
+\subsection{Determinación del Entrehierro (Gap)}
+Con $A_{min} = 90 \text{ mm}^2$ y $N_1=10$, se calcula $\Delta B = 49,4 \text{ mT}$ usando \eqref{eq:DeltaB}. 
+Definiendo un $B_{max} = 100 \text{ mT}$, se requiere que $B_{bias} \leq 50,6 \text{ mT}$. 
+Aplicando la inecuación derivada de \eqref{eq:Bbias} con el peor escenario de $\mu_i = 5375$ e $I_{dc} = 1,21 \text{ A}$, se obtiene $l_g > 0,29 \text{ mm}$. Se adopta \textbf{lg = 0,3 mm}.
+
+\subsection{Parámetros Equivalentes y Pérdidas}
+Para el cálculo de $L_{mag}$, se utiliza el peor escenario de permeabilidad ($\mu_i = 3225$). Según \eqref{eq:MuEf}, la permeabilidad efectiva es $\mu_{ef} = 140,29$. Aplicando \eqref{eq:Lmag} con $A_e = 98 \text{ mm}^2$ y $L_e = 44 \text{ mm}$, resulta \textbf{Lmag = 39,26 $\mu$H}.
+
+Las resistencias de los devanados se obtienen mediante \eqref{eq:Rcu} con $L_n = 52 \text{ mm}$:
 \begin{itemize}
-    \item Tensión de entrada ($V_{in}$): 5 V
-    \item Frecuencia ($F$): 75 kHz
-    \item Ciclo de trabajo ($D$): 2/3
-    \item Relación de transformación ($N_2/N_1$): 1.5
-    \item Número de secundarios (\# $N_2$): 3
-    \item Densidad de corriente admisible ($J$): 3 A/mm$^2$
-    \item Corriente continua de magnetización ($IDCN$): 1.1 A $\pm$ 10\%
+    \item \textbf{Rcu1 = 29,4 m$\Omega$} $\rightarrow$ Pérdidas: $P_{cu1} = I_{rms}^2 \cdot R_{cu1} = 47,4 \text{ mW}$.
+    \item \textbf{Rcu2 = 132 m$\Omega$} (con $I_{2rms} = 0,85 \text{ A}$) $\rightarrow$ Pérdidas: $P_{cu2} = 95,4 \text{ mW}$.
 \end{itemize}
-Como restricciones físicas de hardware, se debe utilizar un núcleo de ferrite RM10 (material N30 de TDK con $B_{max} = 100 \text{ mT}$) y un carrete plástico de dos secciones, separando el primario de los secundarios.
 
-\section{Memoria de Cálculo}
-% Explicitando todos los modelos utilizados, ecuaciones, supuestos y criterios de selección.
+Para las pérdidas en el hierro, con un factor de pérdida $\frac{\tan \delta}{\mu_i} = 76 \cdot 10^{-6}$ a $75 \text{ kHz}$, se calcula por \eqref{eq:Rfe} una \textbf{$R_{Fe}$ = 57,4 $\Omega$}. Las pérdidas en el núcleo resultan:
+\begin{equation*}
+P_{core} = \frac{V_{rms}^2}{R_{Fe}} = 290 \text{ mW}
+\end{equation*}
 
-\subsection{Cálculo de Espiras}
-% Justificar el número de espiras del primario y los secundarios garantizando que no haya saturación.
-
-\subsection{Cálculo de Entrehierro}
-% Cálculo del espesor óptimo.
-
-\subsection{Selección de Conductores y Distribución}
-% Consideraciones sobre densidad de corriente, efecto skin, profundidad de penetración y verificación del volumen disponible en el carrete.
-
-\subsection{Cálculo de Inductancias}
-% Estimación de la inductancia de magnetización y de dispersión.
-
-\section{Estimación de Pérdidas}
-% Pérdidas resistivas en el cobre y pérdidas en el núcleo (histéresis y corrientes parásitas).
-
-\section{Modelo Equivalente del Transformador}
-% Presentar el circuito/modelo final con todos los parámetros calculados. 
-% Aquí puedes usar el paquete circuitikz si deseas dibujar el circuito en LaTeX.
-
-\section{Informe Técnico: Análisis y Criterios}
-\subsection{Criterios de Diseño y Alternativas Evaluadas}
-% Justificación del uso de la herramienta de IA, los prompts generados y las decisiones adoptadas frente a posibles alternativas.
-
-\subsection{Análisis de Errores y Desviaciones}
-% Análisis de las posibles desviaciones teóricas y tolerancias en los materiales.
-
-\section{Conclusiones}
-% Conclusiones finales sobre la factibilidad del diseño y la experiencia del uso de IA como herramienta de asistencia.
+Finalmente, la inductancia de dispersión se estima con \eqref{eq:Ldisp}. Las pérdidas totales del transformador ascienden a \textbf{463 mW}.
 
 \end{document}
