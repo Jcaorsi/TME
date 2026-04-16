@@ -1,0 +1,197 @@
+\documentclass{article}
+
+%%%%%%%%%%%%%%% LIBRERIAS %%%%%%%%%%%%%%%%%%%%%
+\usepackage[thinc]{esdiff}
+\usepackage{amsmath}
+\usepackage{caption}
+\usepackage{physics}
+\usepackage{titlesec}
+\usepackage{titletoc}
+\usepackage{graphicx}
+\usepackage[spanish,es-tabla]{babel} % 'es-tabla' cambia Cuadro→Tabla
+\usepackage{hyperref}                % cargar después de babel
+\usepackage{float}
+\usepackage{circuitikz}
+\usepackage[left=3cm,right=3cm]{geometry} %para margenes
+\usepackage{subfiles} 
+\usepackage{subcaption}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs} % Para tablas con tematica de paper cientifico
+\usepackage{siunitx}  % Para alinear números en las tablas d:
+\usepackage{amssymb}
+
+
+%%%%%%%%%%%%%%%%%%% VARIABLES %%%%%%%%%%%%%%%%%%%%
+\newcommand{\Facultad}{Instituto Tecnológico \\de\\ Buenos Aires} %constantes
+\newcommand{\TPn}{Trabajo Práctico N° 1\\ Informe}
+\newcommand{\TPtema}{Diseño de Transformadores de Alta Frecuencia}
+\renewcommand{\thesection}{\arabic{section}}          % 2
+\renewcommand{\thesubsection}{\quad \alph{subsection}}   % a
+\renewcommand{\thesubsubsection}{\quad \thesubsection.~\roman{subsubsection}} % a. i
+\graphicspath{{imagenes/}} %para que acceda a las fotos en la carpeta directamente
+
+
+%%%%%%%%%%%%%%%%%% FORMATO TÍTULO Y NUMERACIÓN %%%%%%%%%%%%%%%%%%%
+% Numeración de secciones
+\renewcommand{\thesection}{\arabic{section}.}          
+\renewcommand{\thesubsection}{\thesection\arabic{subsection}}       
+\renewcommand{\thesubsubsection}{$\alph{subsubsection})$}
+
+% Numerar hasta subsubsecciones
+\setcounter{secnumdepth}{3}
+
+% Formato de títulos
+\titleformat{\section}{\Huge\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\LARGE\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\large\bfseries}{\thesubsubsection}{0.5em}{}
+
+
+
+%%%%%%%%%%%%%%%%%%% ARCHIVO %%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+%%%CARATULA%%%
+\begin{titlepage} %creo portada
+
+        \begin{flushleft}
+            \centering
+            \includegraphics[width=0.3\textwidth]{Logo_ITBA.png}
+        \end{flushleft}
+
+        \centering
+            
+        {\scshape\LARGE \Facultad \par} %\par sirve para indicar un final de parrafo
+        \vspace{1cm}                    %esto hace un espacio entre lineas de 1cm
+
+
+        {\huge\bfseries \TPn \par}
+        \vspace{1.5cm}
+        {\Large Tecnología de Materiales Electrónicos\\ 25.12 \par}
+        \vspace{0.5cm}
+        {\Large \TPtema \par}
+        \vfill                      %sirve para rellenar el espacio y quede simétrico.
+        {\Large \bfseries Grupo N° 2 \par}
+        \vspace{1cm}
+        {\large Juan Bautista Correa Uranga \hfill Legajo: 65016 \par} 
+        {\large Juan Ignacio Caorsi \hfill Legajo: 65532  \par}
+        {\large Rita Moschini \hfill Legajo: 67026 \par} 
+        {\large Lucas Solar Grillo \hfill Legajo: 63322\par}
+        \vfill
+        {\large \today\par}
+        \vfill
+
+\end{titlepage}
+
+\section{Resumen}
+	En este TP, se realizó el desarrollo de un transformador utilizando las ecuaciones vistas en clase. Para ello se trabajó con un núcleo RM10 de material N30 de la marca TDK, brindado por la cátedra. En base a esos parámetros se realizó el cálculos de las variables para cumplir con los requerimientos mencionados en el TP.\par
+	Los valores obtenidos del transformador fueron:
+	
+	\begin{itemize}
+\item Primario de 10 vueltas, con 3 cables en paralelo de $\varnothing$ 0,45mm.
+\item 3 secundarios, cada uno de 15 vueltas con 3 cables en paralelo de $\varnothing$ 0,45mm.
+\item $L_{gap}$ de 0,3mm
+\end{itemize}
+
+El desarrollo de cuentas esta dado en la hoja de cálculos. Aquí se verá el análisis cualitativo.
+
+\section{Datos pedidos}
+
+En el TP se especificaron los siguientes datos:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline
+Grupo & $V_{in}$ [V] & F [kHz] & D & N2/N1 & \# N2 & $J$ [A/m$^2$] & $I_{DC_{N1}}$ [A] \\
+\hline
+2 & 5 & 75 & 2/3 & 1.5 & 3 & 3 & $1.1 \pm 10\%$ \\
+\hline
+\end{tabular}
+\label{tab:datos}
+\end{table}
+
+Estos datos fueron tomados en cuenta a la hora del cálculo del transformador. A su vez se tomo en cuenta que la corriente de la señal de entrada contaba con una forma de diente de sierra (Observar imagen:\ref{fig:senal_diente_sierra})
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines=middle,
+    xlabel={$t$},
+    ylabel={$i(t)$},
+    xmin=0, xmax=7.5,
+    ymin=0, ymax=5,
+    xtick={0,2,6},
+    xticklabels={$0$,$DT$,$T$},
+    ytick={1.5,3.5},
+    yticklabels={$i_{\min}$,$i_{\max}$},
+    enlargelimits=false,
+    width=12cm,
+    height=6cm,
+    grid=both
+]
+
+% Primer período
+\addplot[thick] coordinates {(0,1.5) (2,3.5)};
+\addplot[thick] coordinates {(2,3.5) (2,0)};
+\addplot[thick] coordinates {(2,0) (6,0)};
+
+% Segundo período
+\addplot[thick] coordinates {(6,1.5) (8,3.5)};
+\addplot[thick] coordinates {(8,3.5) (8,0)};
+
+% Líneas auxiliares
+\addplot[dashed] coordinates {(0,1.5) (6,1.5)};
+\addplot[dashed] coordinates {(0,3.5) (2,3.5)};
+
+\end{axis}
+\end{tikzpicture}
+\caption{Forma de la corriente \(i(t)\).}
+\label{fig:senal_diente_sierra}
+\end{figure}
+
+\section{Datos del transformador}
+
+	Se busco la hoja de datos del fabricante TDK y se extrajeron los siguientes datos (observar \cite{tdk}):
+	
+	(Buscar datos de la hoja y completar)
+	
+	
+\section{Cálculos}
+
+\subsection{Elección del diametro y cantidad de cables}
+	Primero se tomo en cuenta los cables disponibles en el laboratorio. En el laboratorio solo tenían disponibles dos diametros, $\varnothing$0,45 y $\varnothing$ 0,6mm.\\
+	
+	Con esto en cuenta y en conjunto con la frecuencia esperada se calculó el efecto skin. Este arrojó el siguiente $d_{skin} = 0,276 mm$. Debido a la condición de desarrollo $ \varnothing \leq 2 d_{skin}$, se optó por el cable de $\varnothing $ 0,45 mm. 
+	
+	En segundo lugar, se analizo cuantos cables en paralelo serían necesarios para poder aguantar la densidad de corriente (Observar tabla: \ref{tab:datos}). \par
+	
+	Se calculó $I_{rms}$ = 0,988 A, lo que termino arrojando que se necesitaba una sección de cobre de almenos $A_{cu} = 0,33 mm^2$. De esta manera, para poder cumplir este requerimiento, en el primario se requirieron 3 cables en paralelo arrojando una $A_{cable} = 0,477 mm^2$. No se usaron dos vueltas puesto a que se obtenían un area de $0,318 mm^2$ lo cual podría suponer un peligro de sobrecarga.\par
+	Se repitió el mismo procedimiento en el secundario, llegando a que cada secundario requería también 3 cables en paralelo.
+
+\subsection{Elección de cantidad de vueltas}
+
+Este cálculo se realizo teniendo en cuenta area disponible dentro del carrete ($A_n$ = 39 $mm^2$). Para obtener el area total disponible para enrollar se tomo un Kw = 0,37 asumiendo que el bobinado no sería prolijo. Esta elección se hizo teniendo en cuenta que esta sería nuestra primera vez armando un tranformador. Luego dividiendo el area restante en 2, se obtuvo que cada sección tenía un area disponible de $ 7,21 mm^2$.
+
+Luego se despejo de la siguiente ecuación las cantidades de vueltas maximas que se podrían dar:
+\begin{equation*}
+N_x \cdot A_{por vuelta} \leq 7,21 mm^2
+\end{equation*}
+
+Con esto se llegó a que $N \leq 15$. Finalmente se crearon los pares de vueltas (2:3), (4:6), (6:9), (8:12) y (10:15) teniendo en cuenta la relacion $\frac{N2}{N1}= 1,5$
+
+
+
+
+
+\begin{thebibliography}{9}
+
+\bibitem{tdk}
+TDK Electronics, \textit{RM 10, RM 10 LP Core and accessories}, Oct. 2022.
+
+\end{thebibliography}
+
+
+
+\end{document}
