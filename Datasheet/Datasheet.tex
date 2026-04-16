@@ -1,0 +1,112 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{titlesec}
+\geometry{margin=2cm}
+
+\titleformat{\section}{\large\bfseries}{}{0em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{}{0em}{}
+
+\begin{document}
+
+\begin{center}
+    {\Large \textbf{Transformador de Alta Frecuencia\\ TP1 TME\\ Grupo 2}}\\
+    \vspace{2mm}
+    \textbf{Especificaciones Técnicas\\2026 1er Cuatri}
+\end{center}
+
+\vspace{5mm}
+
+\section*{Datos generales}
+
+\begin{tabular}{ll}
+\toprule
+Tensión de entrada & $V_{in} = 5\,\text{V}$ \\
+Frecuencia de operación & $75\,\text{kHz}$ \\
+Ciclo de trabajo & $D = 0{,}66$ \\
+Corriente primaria DC & $I_{dc} = 1.1 \pm 10\%\,\text{A}$ \\
+Relación de vueltas & $\frac{N_2}{N_1} = 1{,}5$ \\
+Número de secundarios & 3 \\
+\bottomrule
+\end{tabular}
+
+\vspace{5mm}
+
+\section*{Núcleo y carrete}
+
+\begin{tabular}{ll}
+\toprule
+Núcleo & RM10 \\
+Material & N30 (sin agujero) \\
+Fabricante & TDK \\
+Carrete & B65814N1008D002 \\
+Longitud magnética & $l_e = 44\,\text{mm}$ \\
+Área efectiva & $A_e = 98\,\text{mm}^2$ \\
+Volumen efectivo & $V_e = 4310\,\text{mm}^3$ \\
+\bottomrule
+\end{tabular}
+
+\vspace{5mm}
+
+\section*{Especificaciones del bobinado}
+
+\begin{tabular}{lcc}
+\toprule
+Parámetro & Primario & Secundario (c/u) \\
+\midrule
+Cantidad de vueltas & 10 & 15 \\
+Conductores & $3 \times 0.45\,\text{mm}$ & $3 \times 0.45\,\text{mm}$ \\
+Área por conductor & $0{,}159\,\text{mm}^2$ & $0{,}159\,\text{mm}^2$ \\
+Área total (paralelo) & $0{,}477\,\text{mm}^2$ & $0{,}477\,\text{mm}^2$ \\
+Área total Cu & $4{,}77\,\text{mm}^2$ & COMPLETAR\\
+$I_{\text{rms}}$ & $1\,\text{A}REVISAR$ & $0,85\,\text{A}$\\
+Densidad de corriente & $2.1\,\text{A/mm}^2$ & COMPLETAR \\
+\bottomrule
+\end{tabular}
+
+\vspace{5mm}
+
+\section*{Características magnéticas}
+
+\begin{tabular}{ll}
+\toprule
+Inducción máxima admisible & $B_{\max} = 100\,\text{mT}$ \\
+Inducción AC pico & $B_{\text{AC}} = 49{,}4\,\text{mT}$ \\
+Inducción DC máxima & $B_{\text{DC}} = 50{,}6\,\text{mT}$ \\
+Entrehierro & $0{,}3\,\text{mm}$ \\
+Permeabilidad efectiva & $\mu_{\text{eff}} = 140{,}2$ \\
+\bottomrule
+\end{tabular}
+
+\vspace{5mm}
+
+\section*{Pérdidas}
+
+\begin{tabular}{ll}
+\toprule
+Pérdidas en núcleo & $290\,\text{mW}$ \\
+Pérdidas cobre primario & $47{,}4\,\text{mW}$ \\
+Pérdidas cobre secundario & $95{,}4\,\text{mW}$ \\
+Pérdidas totales & $463\,\text{mW}$ \\
+\bottomrule
+\end{tabular}
+
+\vspace{5mm}
+
+\section*{Modelo equivalente}
+
+\begin{tabular}{ll}
+\toprule
+$R_{cu1}$ & $29{,}4\,\text{m}\Omega$ \\
+$R_{cu2}$ & $132\,\text{m}\Omega$ \\
+$R_{Fe}$ & $57{,}4\,\Omega$ \\
+$L_{mag}$ & $39{,}26\,\mu\text{H}$ \\
+$L_{disp}$ & COMPLETAR \\
+\bottomrule
+\end{tabular}
+
+\end{document}
