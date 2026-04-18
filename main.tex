@@ -22,14 +22,14 @@
 
 %%%%%%%%%%%%%%%%%%% VARIABLES %%%%%%%%%%%%%%%%%%%%
 \newcommand{\Facultad}{Instituto Tecnológico \\de\\ Buenos Aires} %constantes
-\newcommand{\TPn}{Trabajo Práctico N° 1}
-\newcommand{\TPtema}{Diseño de Transformadores de Alta Frecuencia}
+\newcommand{\TPn}{Trabajo Práctico N°1: Transformadores}
+\newcommand{\TPtema}{}
 \renewcommand{\thesection}{\arabic{section}}          % 2
 \renewcommand{\thesubsection}{\quad \alph{subsection}}   % a
 \renewcommand{\thesubsubsection}{\quad \thesubsection.~\roman{subsubsection}} % a. i
 \graphicspath{{imagenes/}} %para que acceda a las fotos en la carpeta directamente
 
-
+ 
 %%%%%%%%%%%%%%%%%% FORMATO TÍTULO Y NUMERACIÓN %%%%%%%%%%%%%%%%%%%
 % Numeración de secciones
 \renewcommand{\thesection}{\arabic{section}.}          
@@ -64,13 +64,15 @@
 
 
         {\huge\bfseries \TPn \par}
-        \vspace{1.5cm}
+        \vspace{1cm}
         {\Large Tecnología de Materiales Electrónicos\\ 25.12 \par}
         \vspace{0.5cm}
-        {\Large \TPtema \par}
-        \vfill                      %sirve para rellenar el espacio y quede simétrico.
-        {\Large \bfseries Grupo N° 2 \par}
-        \vspace{1cm}
+        %{\Large \TPtema \par}
+        %\vfill                      %sirve para rellenar el espacio y quede simétrico.
+        {\Large \textbf{ Memoria de cálculo} \par}
+        \vspace{0.5cm}
+         {\Large Grupo 2 \par}
+        \vspace{2cm}
         {\large Juan Bautista Correa Uranga \hfill Legajo: 65016 \par} 
         {\large Juan Ignacio Caorsi \hfill Legajo: 65532  \par}
         {\large Rita Moschini \hfill Legajo: 67026 \par} 
@@ -81,217 +83,261 @@
 
 \end{titlepage}
 
-\section{Marco Teórico}
+\section{Procedimiento de Cálculo}
 
-En esta sección se presentan las expresiones fundamentales utilizadas para el dimensionamiento del transformador.
+\subsection{Diámetro de cable}
 
-\subsection{Cálculo de $I_{rms}$}
+Para calcular el efecto skin se uso la siguiente ecuación:
+\begin{equation*}
+    \delta = \sqrt{\frac{\rho}{\pi \cdot f \cdot \mu}}
+    \label{eq:Skin}
+\end{equation*}
+
+Para obtener la resistividad del conductor se uso
+\begin{equation*}
+    \rho = \rho_0 (1 + \alpha (T - T_0)) = 17,2 \cdot 10^{-9} ( 1 + 3,93 \cdot (100 - 20)) = 22,607 \cdot 10^{-9} \Omega m
+\end{equation*}
+con T=100°C, y lo demás son constantes tabuladas. Así, $ \delta = 0,276 $ mm y si $ \phi_c $ es el diámetro del cable, se tiene que $ \phi_c \leq 2 \cdot \delta = 0,552 $ mm entonces tomamos $ \phi_c = 0,45 $ mm.
+
+
+\subsection{Cantidad de cables del bobinado primario}
+
+\begin{equation*}
+    J = \frac{I_{rms}}{A_{CuPrimario}} \Rightarrow A_{CuPrimario}=\frac{I_{rms}}{J}
+\end{equation*}
+
+Como se explica en el informe, se utilizó la aproximación a continuación:
+\begin{equation*}
+    I_{rms} = \sqrt{D} \cdot I_{dc} = \sqrt{\frac{2}{3}} \cdot 1,1^2 = 1 A
+\end{equation*}
+
+De esta manera, se obtuvo $ A_{CuPrimario} = 0,33 mm^2 $ 
+
+Sabiendo que el diámetro del cable es de 0,45 mm, el área del cable resulta $ A_{cable} = 0,159 mm^2 $ y luego la cantidad de cables del bobinado primario se puede estimar mediante m siendo
+\begin{equation}
+    m = \frac{A_{CuPrimario}}{A_{cable}} = 2,1
+    \label{eq:CablesParalelo}
+\end{equation}
+El criterio de redondeo de m se explica en profundidad en el informe. En base a este cálculo de m y a dicho criterio, tomaremos que la cantidad de cables del bobinado primario será N1=3.
+
+\subsection{Cantidad de vueltas del bobinado primario}
+El carrete tiene $ A_n = 39 mm^2 $. Tomando un factor de ventana $kw=0,37$,  llegamos a que el área disponible para devanar el bobinado primario es
+\begin{equation*}
+    A_{nReal}=\frac{A_n}{2} \cdot kw = 7,21 mm^2
+\end{equation*}
+
+Teniendo N1=3 y N2=3 (esto último por consigna), la cantidad de área que ocupa cada vuelta tanto del bobinado primario como del secundario es:
+\begin{equation*}
+    A_{porVuelta} = N1 \cdot A_{cable} = 0,477 mm^2
+\end{equation*}
+
+y finalmente, la cantidad de área que ocupa en su totalidad el bobinado primario debe ser menor o igual a la disponible, de manera que
+\begin{equation*}
+    N1 \cdot A_{cable} \leq 7,21 mm^2
+\end{equation*}
+
+de esta manera se llega a que tanto N1 como N2 deben ser menores o iguales a 15, y usando que $ N1 = 1,5 \cdot N2 $, se llega a las configuraciones visibles en el informe. En este grupo se eligió N1=10 y N2 = 15.
+
+\subsection{Densidad de flujo de magnetización, gap y Lmag}
+
+La densidad de flujo magnético total se calcula mediante
+\begin{equation*} 
+    B = \Delta B + B_{bias} \leq 100 mT
+\end{equation*}
+conformada por
+\begin{equation}
+    \Delta B = \frac{V_{in} \cdot D}{N_1 \cdot A_{min} \cdot f}
+    \label{eq:DeltaB}
+\end{equation}
+\begin{equation}
+    B_{bias} = \frac{\mu_0 \cdot \mu_i \cdot N_1 \cdot I_{dc}}{L_e + \mu_i \cdot l_g}
+    \label{eq:Bbias}
+\end{equation}
+
+En estas ecuaciones, $ A_{min} $ es el área transversal mínima del núcleo, $\mu_i$ la permeabilidad magnética del material sin entrehierro (se tomó el peor escenario es decir $\mu_i = 5375$), $l_e$ la longitud promedio del camino magnético, y $l_g$ la longitud del entrehierro (gap).
+
+Con los resultados ya obtenidos, de la ecuación \ref{eq:DeltaB} se obtiene que $ \Delta B (N1=10) = 49,4 mT  $.
+Luego, para obtener la longitud del gap,\\
+\begin{align*}
+     B_{bias} \leq 100mT - \Delta B \\
+     \frac{\mu_0 \cdot \mu_i \cdot N_1 \cdot I_{dc}}{L_e + \mu_i \cdot l_g} \leq 50,6 mT  \\
+     l_g \geq 0,29 mm  \\
+\end{align*}
+y se eligió tomar $ l_g = 0,3 $ mm 
+
+Luego, para calcular $ L_{mag} $ se requiere primero $ \mu_e $. Se calculó el mismo usando el peor escenario de $ mu_i $, que ahora es 3225.
+\begin{equation}
+    \mu_{e} = \frac{\mu_i}{1 + \frac{\mu_i \cdot l_g}{L_e}} = 140,29
+    \label{eq:MuEf}
+\end{equation}
+
+\begin{equation}
+    L_{mag} = \frac{\mu_0 \cdot \mu_{ef} \cdot N_1^2 \cdot A_e}{L_e} = 39,26 \mu H
+    \label{eq:Lmag}
+\end{equation}
+
+
+\subsection{Cálculo de la Irms real}
+
+Teniendo Lmag se pudo continuar con el cálculo de la Irms correspondiente. A partir de las ecuaciones \ref{eq:deltaI}, \ref{eq:Imin} y \ref{eq:Imax} se sabe que 
+\begin{align*}
+    \Delta i = \frac{5}{39,26\mu} \cdot \frac{2}{3} \cdot \frac{1}{75k} = 1,132 A \\
+    i_{min} = \frac{I_{dc}}{D} - \frac{\Delta i}{2} = \frac{1,1}{2/3} - \frac{1,132}{2} = 1,084 \\
+    i_{max} = \frac{I_{dc}}{D} + \frac{\Delta i}{2} = \frac{1,1}{2/3} + \frac{1,132}{2} = 2,216
+\end{align*}
+así, se obtiene mediante la ecuación \ref{eq:IRMSprecisa} que $ i_{rms} = 1,567 A $.
+
+La densidad de corriente J quedaría $ J = \frac{i_{rms}}{m \cdot A_{cable}} = \frac{1,567}{3 \cdot 0,159 mm^2} = 3,28 A/mm^2  $. La diferencia porcentual entre la $ J = 3 A/mm^2 $ y el valor obtenido resulta ser
+\begin{equation*}
+    \frac{|3-3,28|}{3}\cdot100 = 9,3%
+\end{equation*}
+es decir una diferencia menor al $ 10\%$.
+
+
+\subsection{Pérdidas}
+
+\subsubsection{Cobre}
+Para calcular las pérdidas en los bobinados:
+\begin{equation}
+    r_{Cu} = \frac{\rho \cdot l_n \cdot N}{m \cdot A_{cable}}
+    \label{eq:Rcu}
+\end{equation}
+Donde $\rho$ es la resistividad del cobre a $100^\circ C$ y $l_n = 52 $ mm es la longitud media de una espira.
+Las pérdidas en el bobinado primario se modelan mediante $ r_{Cu1} = 29,4 m\Omega $ y en el secundario $ r_{Cu2} = 132 m\Omega $.
+
+Luego, la potencia disipada por la resistencia del cobre de cada bobinado se calcula mediante
+\begin{equation*}
+    P_{Cu} = I_{rms}^2 \cdot r_{Cu}
+\end{equation*}
+
+En el bobinado primario la potencia disipada es $ P_{CuPrimario} = 72,19 mW $
+
+Luego, la corriente en el bobinado secundario se asume $ I_{rmsSecundario} = \frac{N1}{N2} \cdot I_{rms} = 1,045 A  \Rightarrow P_{CuSecundario} = 144,15 mW $
+
+\subsubsection{Foucault}
+El factor de pérdida resulta ser
+\begin{equation*}
+    \frac{\delta}{\mu_i} \Big|_{75kHz} = 75 \cdot 10^{-6}
+\end{equation*}
+
+Y luego la resistencia que modela la resistencia de foucalt es
+\begin{equation*}
+    r_{Fe} = \frac{2\pi f \cdot L_{mag} \cdot \mu_i}{\frac{\delta}{\mu_i} \mu_i^2} = 57,4 \Omega
+\end{equation*}
+la potencia disipada por dicha resistencia es 
+\begin{equation*}
+    P_{Fe} = \frac{V_{rms}^2}{r_{Fe}} =  290 mW
+\end{equation*}
+con $ V_{rms} = \sqrt(D) \cdot Vin  = \frac{2}{3} \cdot 5 = 4,08 V $
+
+\vspace{5mm}
+La pérdida total resulta ser $ P_{totalPorSegundo} = 506,34 mW $ .
+
+\subsubsection{Densidad de Flujo Magnético Disipado}
+La densidad de flujo magnético disipada se modela mediante
+\begin{equation*}
+    L_{disip} = \frac{\mu_0 \cdot N1 \cdot l_n \cdot b }{3h}
+\end{equation*}
+donde b es el ancho de la sección de bobinado y h es la altura del bobinado.
+
+
+\section{Anexo}
+\textbf{Cálculo preciso de $ I_{rms} $}
+\label{IrmsPreciso}
 
 \begin{figure}[H]
-\centering
-\begin{tikzpicture}
-\begin{axis}[
-    axis lines=middle,
-    xlabel={$t$},
-    ylabel={$i(t)$},
-    xmin=0, xmax=7.5,
-    ymin=0, ymax=5,
-    xtick={0,2,6},
-    xticklabels={$0$,$DT$,$T$},
-    ytick={1.5,3.5},
-    yticklabels={$i_{\min}$,$i_{\max}$},
-    enlargelimits=false,
-    width=12cm,
-    height=6cm,
-    grid=both
-]
+    \centering
+    \begin{tikzpicture}
+    \begin{axis}[
+        axis lines=middle,
+        xlabel={$t$},
+        ylabel={$i(t)$},
+        xmin=0, xmax=7.5,
+        ymin=0, ymax=5,
+        xtick={0,2,6},
+        xticklabels={$0$,$\Delta T$,$T$},
+        ytick={1.5,3.5},
+        yticklabels={$i_{\min}$,$i_{\max}$},
+        enlargelimits=false,
+        width=12cm,
+        height=6cm,
+        grid=both
+    ]
 
-% Primer período
-\addplot[thick] coordinates {(0,1.5) (2,3.5)};
-\addplot[thick] coordinates {(2,3.5) (2,0)};
-\addplot[thick] coordinates {(2,0) (6,0)};
+    % Primer período
+    \addplot[thick] coordinates {(0,1.5) (2,3.5)};
+    \addplot[thick] coordinates {(2,3.5) (2,0)};
+    \addplot[thick] coordinates {(2,0) (6,0)};
 
-% Segundo período
-\addplot[thick] coordinates {(6,1.5) (8,3.5)};
-\addplot[thick] coordinates {(8,3.5) (8,0)};
+    % Segundo período
+    \addplot[thick] coordinates {(6,1.5) (8,3.5)};
+    \addplot[thick] coordinates {(8,3.5) (8,0)};
 
-% Líneas auxiliares
-\addplot[dashed] coordinates {(0,1.5) (6,1.5)};
-\addplot[dashed] coordinates {(0,3.5) (2,3.5)};
+    % Líneas auxiliares
+    \addplot[dashed] coordinates {(0,1.5) (6,1.5)};
+    \addplot[dashed] coordinates {(0,3.5) (2,3.5)};
 
-\end{axis}
-\end{tikzpicture}
-\caption{Forma de la corriente \(i(t)\).}
-\label{fig:senal_diente_sierra}
+    \end{axis}
+    \end{tikzpicture}
+    \caption{Forma de la corriente \(i(t)\).}
+    \label{fig:senal_diente_sierra}
 \end{figure}
 Como la corriente de entrada tiene forma de rampa (observar figura \ref{fig:senal_diente_sierra}), la corriente del circuito puede ser descripta por la siguiente ecuación:
 
 \begin{equation*}
-i(t) = i_{min} + (\frac{i_{max}-i_{min}}{DT})\cdot t
+i(t) = i_{min} + (\frac{i_{max}-i_{min}}{\Delta T})\cdot t
 \end{equation*}
-Con $i_{min}$ el valor minimo de la rampa y $i_{max}$ el valor maximo de la rampa.
+Con $i_{min}$ el valor mínimo de la rampa y $i_{max}$ el valor máximo de la rampa.
 
-Es importante aclarar que esta señal converge a esta función dentro del tiempo $t \le DT$. Luego de este tiempo, la señal es 0.
+Es importante aclarar que esta señal toma esta forma dentro del tiempo $ \Delta T$ en que la señal está encendida, es decir para  $nT< t \leq (n+D)T$ con $n \in N$  . Para todo instante perteneciente al período Tn con $(n+D)T < t \le (n+1)T $, la señal toma valor nulo. Nótese que el tiempo $ \Delta T $ en que la señal está prendida se corresponde con $ \Delta T = DT $.
 
 Posteriormente usando la ecuación de valor rms, se plantea:
 
 \begin{equation}
-I_{rms}= \sqrt{\frac{1}{T} \int_{0}^{DT}{i^2 dt}} 
-\label{eq:IRMS}
+    I_{rms}= \sqrt{\frac{1}{T} \int_{0}^{\Delta T}{i^2 dt}} 
+    \label{eq:IRMS}
 \end{equation}
 
-Luego llamese $A= \int_{0}^{DT}{i^2 dt}$ y llamese $b=\frac{i_{max}-i_{min}}{DT}$ . Resolviendo:
+Luego llámese $A= \int_{0}^{\Delta T}{i^2 dt}$ y llámese $b=\frac{i_{max}-i_{min}}{\Delta T}$ . Resolviendo:
 
 \begin{align*}
-    A &=\int_{0}{DT}{(i_{min}+bt)dt}\\
-    &=(i_{min}^2\cdot t + i_{min} \cdot b \cdot t^2 + \frac{b^2 \cdot t^3}{3})\Big|_{0}^{DT}\\
-    &=[i_{min}^2 + i_{min}\cdot (i_{max}-i_{min}) + {(i_{max}-i_{min})}^2]\cdot DT\\
-    &=[i_{max}^2 - i_{max} \cdot i_{min} + i_{min}^2] \cdot DT
+    A &=\int_{0}^{\Delta T}{(i_{min}+bt)dt}\\
+    &=(i_{min}^2\cdot t + i_{min} \cdot b \cdot t^2 + \frac{b^2 \cdot t^3}{3})\Big|_{0}^{\Delta T}\\
+    &=\left[i_{min}^2 + i_{min}\cdot (i_{max}-i_{min}) + {(i_{max}-i_{min})}^2 \right] \cdot \Delta T\\
+    &=\left[i_{max}^2 - i_{max} \cdot i_{min} + i_{min}^2 \right] \cdot \Delta T
 \end{align*}
 
-Finalmente, se remplazando A en la ecuación \ref{eq:IRMS}, se llega a la formula de la corriente eficaz:
+Finalmente, se remplazando A en la ecuación \ref{eq:IRMS}, y puesto que $ \frac{\Delta T}{T}=D $, se llega a la fórmula de la corriente eficaz:
 
 \begin{equation}
-I_{rms}=  \sqrt{ [i_{max}^2 - i_{max} \cdot i_{min} + i_{min}^2] \cdot D } 
-\label{eq:IRMSfinal}
+    I_{rms}=  \sqrt{ \left[i_{max}^2 - i_{max} \cdot i_{min} + i_{min}^2\right] \cdot D } 
+    \label{eq:IRMSprecisa}
 \end{equation}
 
 Por otra parte para conseguir $i_{max}$ e $i_{min}$ se parte de lo siguiente:
-
 \begin{equation*}
-V_{in} = L_{mag} \cdot \frac{\Delta i}{\Delta t}
+    V_{in} = L_{mag} \cdot \frac{\Delta i}{\Delta t}
 \end{equation*}
 Despejando 
-\begin{equation*}
-\Delta i = \frac{V_{in} \cdot \Delta t}{L_{mag}}
-\end{equation*}
+\begin{equation}
+    \Delta i = \frac{V_{in} \cdot \Delta t}{L_{mag}}
+    \label{eq:deltaI}
+\end{equation}
 
-Luego busco $I_{dc}$
+Luego a partir del cálculo de $I_{dc}$ (el valor medio de la rampa) obtengo $ i_{min} $ y $ i_{max} $
 \begin{align*}
-    I_{dc} &= \frac{1}{T} \int_{0}^{DT}{(i_{min} + \frac{\Delta i}{DT})dt}\\
-    &= \frac{1}{T} \cdot (i_{min} \cdot t + \frac{\Delta i}{DT} \cdot \frac{t^2}{2}) \Big|_{0}^{DT} \\
+    I_{dc} &= \frac{1}{T} \int_{0}^{\Delta T}{(i_{min} + \frac{\Delta i}{\Delta T})dt}\\
+    &= \frac{1}{T} \cdot (i_{min} \cdot t + \frac{\Delta i}{\Delta T} \cdot \frac{t^2}{2}) \Big|_{0}^{\Delta T} \\
     &= (i_{min} + \frac{\Delta i}{2}) \cdot D
 \end{align*}
 
-Finalmente despejado $i_{min}$ y sumando $\Delta i$ a $i_{min}$  consigo los valores para remplazar en la ecuación \ref{eq:IRMSfinal}:
-
 \begin{equation}
-i_{min}= \frac{I_{dc}}{D} - \frac{\Delta i}{2}
+    i_{min}= \frac{I_{dc}}{D} - \frac{\Delta i}{2}
+    \label{eq:Imin}
 \end{equation}
 \begin{equation}
-i_{min}= \frac{I_{dc}}{D} + \frac{\Delta i}{2}
+    i_{max}= \frac{I_{dc}}{D} + \frac{\Delta i}{2}
+    \label{eq:Imax}
 \end{equation}
-
-
-\subsection{Dimensionamiento del Conductor}
-Para determinar la cantidad de conductores en paralelo necesarios para manejar la corriente sin exceder la densidad de corriente permitida:
-\begin{equation} \label{eq:AreaTotal}
-A_{Cu,total} = \frac{I_{rms}}{J}
-\end{equation}
-Donde $I_{rms}$ es la corriente eficaz y $J$ es la densidad de corriente de consigna.
-
-\begin{equation} \label{eq:CablesParalelo}
-m = \left\lceil \frac{A_{Cu,total}}{A_{cable}} \right\rceil
-\end{equation}
-Donde $m$ es el número de hilos en paralelo (redondeado al entero superior) y $A_{cable}$ es el área transversal de un único hilo.
-
-\subsection{Restricciones de Bobinado y Flujo}
-El área neta disponible para el bobinado considerando el factor de ventana $K_w$:
-\begin{equation} \label{eq:Aneta}
-A_{neta} = \frac{A_n}{2} \cdot K_w
-\end{equation}
-Donde $A_n$ es el área de la ventana del núcleo.
-
-Adicionalmente, en diseños de alta frecuencia, es imperativo considerar el \textbf{efecto skin}. Este fenómeno provoca que la densidad de corriente se concentre en la periferia del conductor, reduciendo su sección efectiva. La profundidad de penetración ($\delta$) está dada por:
-\begin{equation} \label{eq:Skin}
-\delta = \sqrt{\frac{\rho}{\pi \cdot f \cdot \mu}}
-\end{equation}
-Donde $\rho$ es la resistividad del conductor, $f$ la frecuencia de conmutación y $\mu$ la permeabilidad del material. Esta restricción limita el diámetro útil del hilo, ya que si el radio del cable supera a $\delta$, el centro del conductor no transporta corriente, lo que resulta en un desaprovechamiento del área de ventana disponible y un aumento innecesario de las pérdidas por conducción.
-
-La variación de la densidad de flujo magnético ($\Delta B$):
-\begin{equation} \label{eq:DeltaB}
-\Delta B = \frac{V_{in} \cdot D}{N_1 \cdot A_{min} \cdot f}
-\end{equation}
-Donde $V_{in}$ es la tensión de entrada, $D$ el ciclo de trabajo (duty cycle), $N_1$ el número de vueltas del primario, $A_{min}$ el área transversal mínima del núcleo y $f$ la frecuencia de conmutación.
-
-La densidad de flujo de polarización ($B_{bias}$) debida a la componente de continua ($I_{dc}$):
-\begin{equation} \label{eq:Bbias}
-B_{bias} = \frac{\mu_0 \cdot \mu_i \cdot N_1 \cdot I_{dc}}{L_e + \mu_i \cdot l_g}
-\end{equation}
-Donde $\mu_0$ es la permeabilidad del vacío, $\mu_i$ la permeabilidad inicial del material, $L_e$ la longitud del camino magnético y $l_g$ la longitud del entrehierro (gap).
-
-\subsection{Parámetros del Circuito Equivalente}
-Permeabilidad efectiva con entrehierro:
-\begin{equation} \label{eq:MuEf}
-\mu_{ef} = \frac{\mu_i}{1 + \frac{\mu_i \cdot l_g}{L_e}}
-\end{equation}
-
-Inductancia de magnetización:
-\begin{equation} \label{eq:Lmag}
-L_{mag} = \frac{\mu_0 \cdot \mu_{ef} \cdot N_1^2 \cdot A_e}{L_e}
-\end{equation}
-Donde $A_e$ es el área efectiva del núcleo.
-
-Resistencia de los devanados:
-\begin{equation} \label{eq:Rcu}
-R_{Cu} = \frac{\rho_{Cu(100^\circ C)} \cdot L_n \cdot N}{m \cdot A_{cable}}
-\end{equation}
-Donde $\rho_{Cu(100^\circ C)}$ es la resistividad del cobre a $100^\circ C$, $L_n$ es la longitud media de una espira y $N$ el número de vueltas.
-
-Resistencia de pérdidas en el núcleo (Fe):
-\begin{equation} \label{eq:Rfe}
-R_{Fe} = \frac{2\pi f \cdot L_{mag} \cdot \mu_i}{\mu_i^2 \cdot \left( \frac{\tan \delta}{\mu_i} \right)}
-\end{equation}
-Donde $\frac{\tan \delta}{\mu_i}$ es el factor de pérdidas del material evaluado a la frecuencia de trabajo.
-
-Inductancia de dispersión (aproximada):
-\begin{equation} \label{eq:Ldisp}
-L_{disp} \approx \frac{\mu_0 \cdot N_1^2 \cdot L_n}{3} \cdot \frac{b}{h}
-\end{equation}
-Donde $b$ es el ancho de la sección del bobinado y $h$ la altura del mismo.
-
----
-
-\section{Procedimiento de Cálculo}
-
-\subsection{Selección de Conductores y Vueltas}
-A partir de la $I_{rms}$ calculada mediante (\ref{eq:IRMSfinal}) y la densidad $J$, se obtiene el área total necesaria de conductor mediante \eqref{eq:AreaTotal}. Sin embargo, la selección 
-del conductor está sujeta a la frecuencia de conmutación de 75 kHz. Utilizando la profundidad de penetración del efecto Skin($\delta$):
-
-\begin{equation} \label{eq:CalculoSkin}
-\delta = \sqrt{\frac{\rho_{Cu(100^\circ C)}}{\pi \cdot f \cdot \mu_0}} \approx 0,28 \text{ mm}
-\end{equation}
-
-Donde $\rho_{Cu(100^\circ C)}$ es la resistividad del cobre a alta temperatura. Para evitar un desaprovechamiento de la sección transversal del conductor, 
-se impone la restricción de que el diámetro del hilo ($d$) no debe superar $2\delta \approx 0,56 \text{ mm}$. 
-
-Al analizar las opciones de diámetro disponibles en el pañol (0,6 mm; 0,45 mm), se selecciona el diámetro de \textbf{0,45 mm}.
-
-Utilizando \eqref{eq:CablesParalelo} con el área de este conductor ($A_{cable} \approx 0,159 \text{ mm}^2$), 
-se determina que para el primario se requieren $m=3$ cables en paralelo. 
-
-Considerando $A_n = 39 \text{ mm}^2$ y un factor de ventana $K_w = 0,37$, el área neta disponible según \eqref{eq:Aneta} limita la cantidad de vueltas. Para cumplir la relación de transformación $n_2/n_1 = 1,5$ y las restricciones físicas, se analizan las opciones (8:12, 4:6, 2:3, 10:15). Se selecciona el par \textbf{N1=10 y N2=15} por ser el único compatible con los límites de saturación y bidireccionalidad.
-
-\subsection{Determinación del Entrehierro (Gap)}
-Con $A_{min} = 90 \text{ mm}^2$ y $N_1=10$, se calcula $\Delta B = 49,4 \text{ mT}$ usando \eqref{eq:DeltaB}. 
-Definiendo un $B_{max} = 100 \text{ mT}$, se requiere que $B_{bias} \leq 50,6 \text{ mT}$. 
-Aplicando la inecuación derivada de \eqref{eq:Bbias} con el peor escenario de $\mu_i = 5375$ e $I_{dc} = 1,21 \text{ A}$, se obtiene $l_g > 0,29 \text{ mm}$. Se adopta \textbf{lg = 0,3 mm}.
-
-\subsection{Parámetros Equivalentes y Pérdidas}
-Para el cálculo de $L_{mag}$, se utiliza el peor escenario de permeabilidad ($\mu_i = 3225$). Según \eqref{eq:MuEf}, la permeabilidad efectiva es $\mu_{ef} = 140,29$. Aplicando \eqref{eq:Lmag} con $A_e = 98 \text{ mm}^2$ y $L_e = 44 \text{ mm}$, resulta \textbf{Lmag = 39,26 $\mu$H}.
-
-Las resistencias de los devanados se obtienen mediante \eqref{eq:Rcu} con $L_n = 52 \text{ mm}$:
-\begin{itemize}
-    \item \textbf{Rcu1 = 29,4 m$\Omega$} $\rightarrow$ Pérdidas: $P_{cu1} = I_{rms}^2 \cdot R_{cu1} = 47,4 \text{ mW}$.
-    \item \textbf{Rcu2 = 132 m$\Omega$} (con $I_{2rms} = 0,85 \text{ A}$) $\rightarrow$ Pérdidas: $P_{cu2} = 95,4 \text{ mW}$.
-\end{itemize}
-
-Para las pérdidas en el hierro, con un factor de pérdida $\frac{\tan \delta}{\mu_i} = 76 \cdot 10^{-6}$ a $75 \text{ kHz}$, se calcula por \eqref{eq:Rfe} una \textbf{$R_{Fe}$ = 57,4 $\Omega$}. Las pérdidas en el núcleo resultan:
-\begin{equation*}
-P_{core} = \frac{V_{rms}^2}{R_{Fe}} = 290 \text{ mW}
-\end{equation*}
-
-Finalmente, la inductancia de dispersión se estima con \eqref{eq:Ldisp}. Las pérdidas totales del transformador ascienden a \textbf{463 mW}.
-
 
 \end{document}
