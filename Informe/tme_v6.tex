@@ -19,13 +19,11 @@
 \pgfplotsset{compat=1.18}
 \usepackage{booktabs} % Para tablas con tematica de paper cientifico
 \usepackage{siunitx}  % Para alinear números en las tablas d:
-\usepackage{amssymb}
-
 
 %%%%%%%%%%%%%%%%%%% VARIABLES %%%%%%%%%%%%%%%%%%%%
 \newcommand{\Facultad}{Instituto Tecnológico \\de\\ Buenos Aires} %constantes
-\newcommand{\TPn}{Trabajo Práctico N° 1\\ Informe}
-\newcommand{\TPtema}{Diseño de Transformadores de Alta Frecuencia}
+\newcommand{\TPn}{Trabajo Práctico N°1: Transformadores}
+\newcommand{\TPtema}{}
 \renewcommand{\thesection}{\arabic{section}}          % 2
 \renewcommand{\thesubsection}{\quad \alph{subsection}}   % a
 \renewcommand{\thesubsubsection}{\quad \thesubsection.~\roman{subsubsection}} % a. i
@@ -66,13 +64,15 @@
 
 
         {\huge\bfseries \TPn \par}
-        \vspace{1.5cm}
+        \vspace{1cm}
         {\Large Tecnología de Materiales Electrónicos\\ 25.12 \par}
         \vspace{0.5cm}
-        {\Large \TPtema \par}
-        \vfill                      %sirve para rellenar el espacio y quede simétrico.
-        {\Large \bfseries Grupo N° 2 \par}
-        \vspace{1cm}
+        %{\Large \TPtema \par}
+        %\vfill                      %sirve para rellenar el espacio y quede simétrico.
+        {\Large \textbf{ Informe} \par}
+        \vspace{0.5cm}
+         {\Large Grupo 2 \par}
+        \vspace{2cm}
         {\large Juan Bautista Correa Uranga \hfill Legajo: 65016 \par} 
         {\large Juan Ignacio Caorsi \hfill Legajo: 65532  \par}
         {\large Rita Moschini \hfill Legajo: 67026 \par} 
@@ -83,115 +83,100 @@
 
 \end{titlepage}
 
-\section{Resumen}
-	En este TP, se realizó el desarrollo de un transformador utilizando las ecuaciones vistas en clase. Para ello se trabajó con un núcleo RM10 de material N30 de la marca TDK, brindado por la cátedra. En base a esos parámetros se realizó el cálculos de las variables para cumplir con los requerimientos mencionados en el TP.\par
-	Los valores obtenidos del transformador fueron:
-	
-	\begin{itemize}
-\item Primario de 10 vueltas, con 3 cables en paralelo de $\varnothing$ 0,45mm.
-\item 3 secundarios, cada uno de 15 vueltas con 3 cables en paralelo de $\varnothing$ 0,45mm.
-\item $L_{gap}$ de 0,3mm
-\end{itemize}
+\section{Diámetro de cable}
 
-El desarrollo de cuentas esta dado en la hoja de cálculos. Aquí se verá el análisis cualitativo.
+Inicialmente, con el fin de determinar el diámetro de los cables, se decidió considerar el efecto skin. Este fenómeno provoca que la densidad de corriente se concentre en la periferia del conductor, reduciendo su sección efectiva. La profundidad de penetración ($\delta$) está dada por:
+\begin{equation}
+    \delta = \sqrt{\frac{\rho}{\pi \cdot f \cdot \mu}}
+    \label{eq:Skin}
+\end{equation}
+Donde $\rho$ es la resistividad del conductor, $f$ la frecuencia de conmutación (76e3) y $\mu$ la permeabilidad del material ($ 4 \pi e-7 $). Esta restricción limita el diámetro útil del cable, ya que si el radio del mismo supera a $\delta$, el centro del conductor no transporta corriente, lo que resulta en un desaprovechamiento del área de ventana disponible y un aumento innecesario de las pérdidas por efecto skin. \\
 
-\section{Datos pedidos}
-
-En el TP se especificaron los siguientes datos:
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|c|c|c|c|c|c|c|c|}
-\hline
-Grupo & $V_{in}$ [V] & F [kHz] & D & N2/N1 & \# N2 & $J$ [A/m$^2$] & $I_{DC_{N1}}$ [A] \\
-\hline
-2 & 5 & 75 & 2/3 & 1.5 & 3 & 3 & $1.1 \pm 10\%$ \\
-\hline
-\end{tabular}
-\label{tab:datos}
-\end{table}
-
-Estos datos fueron tomados en cuenta a la hora del cálculo del transformador. A su vez se tomo en cuenta que la corriente de la señal de entrada contaba con una forma de diente de sierra (Observar imagen:\ref{fig:senal_diente_sierra})
-
-\begin{figure}[H]
-\centering
-\begin{tikzpicture}
-\begin{axis}[
-    axis lines=middle,
-    xlabel={$t$},
-    ylabel={$i(t)$},
-    xmin=0, xmax=7.5,
-    ymin=0, ymax=5,
-    xtick={0,2,6},
-    xticklabels={$0$,$DT$,$T$},
-    ytick={1.5,3.5},
-    yticklabels={$i_{\min}$,$i_{\max}$},
-    enlargelimits=false,
-    width=12cm,
-    height=6cm,
-    grid=both
-]
-
-% Primer período
-\addplot[thick] coordinates {(0,1.5) (2,3.5)};
-\addplot[thick] coordinates {(2,3.5) (2,0)};
-\addplot[thick] coordinates {(2,0) (6,0)};
-
-% Segundo período
-\addplot[thick] coordinates {(6,1.5) (8,3.5)};
-\addplot[thick] coordinates {(8,3.5) (8,0)};
-
-% Líneas auxiliares
-\addplot[dashed] coordinates {(0,1.5) (6,1.5)};
-\addplot[dashed] coordinates {(0,3.5) (2,3.5)};
-
-\end{axis}
-\end{tikzpicture}
-\caption{Forma de la corriente \(i(t)\).}
-\label{fig:senal_diente_sierra}
-\end{figure}
-
-\section{Datos del transformador}
-
-	Se busco la hoja de datos del fabricante TDK y se extrajeron los siguientes datos (observar \cite{tdk}):
-	
-	(Buscar datos de la hoja y completar)
-	
-	
-\section{Cálculos}
-
-\subsection{Elección del diametro y cantidad de cables}
-	Primero se tomo en cuenta los cables disponibles en el laboratorio. En el laboratorio solo tenían disponibles dos diametros, $\varnothing$0,45 y $\varnothing$ 0,6mm.\\
-	
-	Con esto en cuenta y en conjunto con la frecuencia esperada se calculó el efecto skin. Este arrojó el siguiente $d_{skin} = 0,276 mm$. Debido a la condición de desarrollo $ \varnothing \leq 2 d_{skin}$, se optó por el cable de $\varnothing $ 0,45 mm. 
-	
-	En segundo lugar, se analizo cuantos cables en paralelo serían necesarios para poder aguantar la densidad de corriente (Observar tabla: \ref{tab:datos}). \par
-	
-	Se calculó $I_{rms}$ = 0,988 A, lo que termino arrojando que se necesitaba una sección de cobre de almenos $A_{cu} = 0,33 mm^2$. De esta manera, para poder cumplir este requerimiento, en el primario se requirieron 3 cables en paralelo arrojando una $A_{cable} = 0,477 mm^2$. No se usaron dos vueltas puesto a que se obtenían un area de $0,318 mm^2$ lo cual podría suponer un peligro de sobrecarga.\par
-	Se repitió el mismo procedimiento en el secundario, llegando a que cada secundario requería también 3 cables en paralelo.
-
-\subsection{Elección de cantidad de vueltas}
-
-Este cálculo se realizo teniendo en cuenta area disponible dentro del carrete ($A_n$ = 39 $mm^2$). Para obtener el area total disponible para enrollar se tomo un Kw = 0,37 asumiendo que el bobinado no sería prolijo. Esta elección se hizo teniendo en cuenta que esta sería nuestra primera vez armando un tranformador. Luego dividiendo el area restante en 2, se obtuvo que cada sección tenía un area disponible de $ 7,21 mm^2$.
-
-Luego se despejo de la siguiente ecuación las cantidades de vueltas maximas que se podrían dar:
+Para obtener la resistividad del conductor se empleó
 \begin{equation*}
-N_x \cdot A_{por vuelta} \leq 7,21 mm^2
+    \rho = \rho_0 \cdot (1 + \alpha \cdot (T - T_0))
 \end{equation*}
+donde $ \rho_0 $ y $ \alpha $ son propiedades del material a la temperatura de referencia $ T_0 $ (se utilizó 20°C), y T es la tempertura para la cual se desea estipular la resistividad del cable. Dado que la temperatura máxima de la consigna era de 100°C, se utilizó ese valor de T. 
+\\ Para obtener valores más precisos, se reemplazó directamente el $\rho$ de la ecuación \ref{eq:Skin}, resultando en $ \delta = 0.276 mm $.
 
-Con esto se llegó a que $N \leq 15$. Finalmente se crearon los pares de vueltas (2:3), (4:6), (6:9), (8:12) y (10:15) teniendo en cuenta la relacion $\frac{N2}{N1}= 1,5$
-
-
-
-
-
-\begin{thebibliography}{9}
-
-\bibitem{tdk}
-TDK Electronics, \textit{RM 10, RM 10 LP Core and accessories}, Oct. 2022.
-
-\end{thebibliography}
+Dado que los diámetros disponibles eran 0.45 mm y 0.6 mm, y que el diámetro del cable debe ser menor o igual a $ 2 \cdot \delta$, se optó por utilizar cables de 0.45mm.
 
 
+\section{Cantidad de cables del bobinado primario}
+
+Con el objetivo de cumplir con una densidad de corriente de $ J = 3 \frac{A_{rms}}{mm^2} $, se empleó la ecuación 
+\begin{equation}
+    J = \frac{I_{rms}}{A_{CuPrimario}}
+\end{equation}
+
+donde $ A_{CuPrimario} $ es el área total que ocuparía el bobinado primario ya devanado con N1 vueltas.
+
+Como se puede apreciar en la memoria de cálculo, calcular la $ I_{rms} $ real implica conocer $L_{mag}$, pero la ecuación para obtener la misma a su vez requiere conocer $ I_{rms} $. Para resolver este conflicto, se decidió utilizar la siguiente aproximación de $ I_{rms} $:
+\begin{equation}
+    I_{rms} = \sqrt{D} \cdot I_{dc} = 1 A
+\end{equation}
+Aquí utilizamos el "peor escenario" de $ I_{dc} $ que es cuando toma su valor máximo y puede quemar el transformador, es decir que tomamos su valor de 1,1 A con un $ 10 \% $ adicional como lo indicaba la consigna.
+
+De esta manera, se despejó
+\begin{equation}
+    A_{CuPrimario} = \frac{I_{rms}}{J} = 0,33 mm^2
+\end{equation}
+
+Sabiendo que el diámetro del cable es de 0,45 mm, el área del cable resulta $ A_{cable} = 0,159 mm^2 $ y luego la cantidad de cables en paralelo del bobinado primario se puede estimar mediante m siendo
+\begin{equation}
+    m = \frac{A_{CuPrimario}}{A_{cable}} = 2,1
+    \label{eq:CablesParalelo}
+\end{equation}
+Considerando que para conducir toda la corriente necesitamos un poco más de dos cables en paralelo, se redondeó hacia arriba, y tomamos que m=3.
+
+\section{Cantidad de vueltas de cada bobinado}
+El carrete tiene $ A_n = 39 mm^2 $. Tomando un factor de ventana $kw=0,37$,  llegamos a que el área disponible para devanar tanto el bobinado primario como el secundario (puesto que en este carrete las areas de ventana son iguales) es 
+\begin{equation}
+    A_{nReal}=\frac{A_n}{2} \cdot kw = 7,21 mm^2
+\end{equation}
+
+Teniendo que la cantidad de secundarios es 3, (esto último por consigna, siendo cada uno de un solo cable en paralelo), la cantidad de área que ocupa cada vuelta tanto del bobinado primario como del secundario es:
+\begin{equation}
+    A_{porVuelta} = A_{cable} \cdot m = 0,477 mm^2
+\end{equation}
+
+y finalmente, la cantidad de área que ocupa en su totalidad el bobinado primario debe ser menor o igual a la disponible, de manera que
+\begin{equation}
+    N1 \cdot (A_{cable} \cdot m) \le 7,21 mm^2  
+    \label{eq:AreaBobinadoPrimario}
+\end{equation}
+
+de esta manera se llega a que tanto N1 como N2 (análogo, con la misma ecuación \ref{eq:AreaBobinadoPrimario} pero con N2) deben ser menores o iguales a 15, pero como se debe cumplir por consigna la igualdad $ N2 = 1,5 \cdot N1 $, se llega finalmente a que las posibles configuraciones 
+(presentadas en formato (N1 : N2)) son $ \{ (2:3), (4:6), (6:9), (8:12), (10:15) \} $. \par
+
+
+%\subsection{Densidad de flujo de magnetización, gap y Lmag}\par
+
+Con el fin de elegir criteriosamente un par (N1:N2) que cumpliera con las especificaciones dadas, se calcularon las densidades de flujo de magnetización y la longitud del gap, siendo la densidad de flujo de magnetización total:
+\begin{equation}
+    B = \Delta B + B_{bias}
+\end{equation}
+conformada por
+\begin{equation}
+    \Delta B = \frac{V_{in} \cdot D}{N_1 \cdot A_{min} \cdot f} \qquad \qquad \qquad 
+    B_{bias} = \frac{\mu_0 \cdot \mu_i \cdot N_1 \cdot I_{dc}}{l_e + \mu_i \cdot l_g}
+    \label{eq:DeltaB}
+\end{equation}
+En estas ecuaciones, $ A_{min} $ es el área transversal mínima del núcleo, $\mu_i$ la permeabilidad magnética del material (sin entrehierro), $l_e$ la longitud promedio del camino magnético, y $l_g$ la longitud del entrehierro (gap).
+Vale la pena destacar que se emplea $ A_{min} $ en el cálculo de $ \Delta B $ pues esta es el área mínima que recorre el flujo de campo magnético, de manera que es en esta sección del núcleo donde se satura primero el transformador.
+
+Luego de evaluar cada par el $ \Delta B $ y $ B_{bias} $, se evaluó cada alternativa;
+
+
+Los pares (2:3) y (4:6) se descartan pues sus valores correspondientes de de $\Delta B$ son mayores a $B_{\text{máx}}$; 
+el par (6:9) se descarta pues el gap que se debería utilizar resulta ser mayor al permitido por la cátedra; 
+Si bien el par (8,12) es viable, se seleccionó el par (10:15) pues cumple con todas las restricciones y tiene
+mejores características como un mayor $L_{mag}$. A pesar de que un mayor número de vueltas implique mayor potencia del 
+cobre, vale la pena igualmente aumentar $L_{mag}$ puesto que las pérdidas por corrientes de foucault y las del 
+núcleo son mayores a las del cobre (véase memoria de cálculo), por lo que reducir a las mismas significativamente en general reduce más 
+el calor generado.
+
+Finalmente, para el par elegido, se obtiene que $ \Delta B = 49,4 mT $ y $ B_{bias} \le 50,6 mT $, y despejando $l_g$ de la ecuación \ref{eq:DeltaB} se obtiene que el gap debe ser mayor a $ 0,29$ mm, por lo que se redondea a $ 0,3$ mm (no se elige uno mayor puesto que estaríamos perdiendo inductancia al seguir aumetando la Reluctancia).
+Cabe aclarar que para el cálculo de $ B_{bias}$ se considera el peor escenario ($B_{bias}$ máximo), con $I_{dc} = 1,21 A$ (valor nominal más el $ 10\% $ y $\mu_{i} = 5375$.
 
 \end{document}
