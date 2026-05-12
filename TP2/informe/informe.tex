@@ -1,0 +1,83 @@
+\documentclass{article}
+
+%%%%%%%%%%%%%%% LIBRERIAS %%%%%%%%%%%%%%%%%%%%%
+\usepackage[thinc]{esdiff}
+\usepackage{amsmath}
+\usepackage{caption}
+\usepackage{physics}
+\usepackage{titlesec}
+\usepackage{titletoc}
+\usepackage{graphicx}
+\usepackage[spanish,es-tabla]{babel} % 'es-tabla' cambia Cuadro→Tabla
+\usepackage{hyperref}                % cargar después de babel
+\usepackage{float}
+\usepackage{circuitikz}
+\usepackage[left=3cm,right=3cm]{geometry} %para margenes
+\usepackage{subfiles} 
+\usepackage{subcaption}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs} % Para tablas con tematica de paper cientifico
+\usepackage{siunitx}  % Para alinear números en las tablas d:
+
+%%%%%%%%%%%%%%%%%%% VARIABLES %%%%%%%%%%%%%%%%%%%%
+\newcommand{\Facultad}{Instituto Tecnológico \\de\\ Buenos Aires} %constantes
+\newcommand{\TPn}{Trabajo Práctico N°1: Transformadores}
+\newcommand{\TPtema}{}
+\renewcommand{\thesection}{\arabic{section}}          % 2
+\renewcommand{\thesubsection}{\quad \alph{subsection}}   % a
+\renewcommand{\thesubsubsection}{\quad \thesubsection.~\roman{subsubsection}} % a. i
+\graphicspath{{imagenes/}} %para que acceda a las fotos en la carpeta directamente
+
+
+%%%%%%%%%%%%%%%%%% FORMATO TÍTULO Y NUMERACIÓN %%%%%%%%%%%%%%%%%%%
+% Numeración de secciones
+\renewcommand{\thesection}{\arabic{section}.}          
+\renewcommand{\thesubsection}{\thesection\arabic{subsection}}       
+\renewcommand{\thesubsubsection}{$\alph{subsubsection}$}
+
+% Numerar hasta subsubsecciones
+\setcounter{secnumdepth}{3}
+
+% Formato de títulos
+\titleformat{\section}{\Huge\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\LARGE\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\large\bfseries}{\thesubsubsection}{0.5em}{}
+
+\begin{document}
+
+En este trabajo práctico, se buscó obtener los valores del circuito térmico equivalente de la figura \ref{circuito} para el integrado LM317 colocado sobre el disipador de distintas formas, tanto con como sin pasta térmica, con el fin de distinguir la forma que consiguiese la máxima disipación de calor.
+
+\begin{figure}[H]
+    \begin{centering}
+    \begin{tikzpicture}[transform shape]
+	% Paths, nodes and wires:
+	\draw (3.75, 3) to[american current source] (3.75, 5);
+	\draw (5, 5) to[american resistor] (7.5, 5);
+	\draw (7.5, 5) to[american resistor] (10, 5);
+	\draw (10, 5) to[american resistor] (12, 5);
+	\draw (12, 5) to[american voltage source] (12, 3);
+	\node[ground] at (3.75, 3.25){};
+	\node[ground] at (12, 3.25){};
+	\draw (5, 5) -- (3.75, 5);
+	\node[plain crossing] at (5, 4.39){};
+	\draw (4.888, 3.25) -- (5.138, 3.25);
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm](Tj) at (5, 3.862){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (4.625, 4.112){$T_j$\\};
+	\node[plain crossing] at (7.5, 4.39){};
+	\draw (7.388, 3.25) -- (7.638, 3.25);
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm] at (7.5, 3.862){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (7.125, 4.112){$T_c$\\};
+	\node[plain crossing] at (10, 4.39){};
+	\draw (9.888, 3.25) -- (10.138, 3.25);
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm] at (10, 3.862){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (9.625, 4.112){$T_s$};
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm] at (12.75, 4.25){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (12.375, 4.5){$T_a$};
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm] at (3, 4.25){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (2.625, 4.5){Q\\};
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm] at (6.125, 5.5){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (5.75, 5.9){$ T_{\theta_{jc}} $};
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm] at (8.75, 5.5){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (8.375, 5.9){$ T_{\theta_{cs}} $};
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm] at (10.875, 5.5){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (10.5, 5.9){$ T_{\theta_{sa}} $};
+    \end{tikzpicture}
+    \label{circuito}
+    \caption{Circuito Térmico equivalente con disipador.}
+    \end{centering}
+\end{figure}
+
+\end{document}
