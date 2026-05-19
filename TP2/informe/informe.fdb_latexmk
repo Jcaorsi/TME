@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber informe"] 1779157330.75331 "informe.bcf" "informe.bbl" "informe" 1779157384.46788 0
-  "informe.bcf" 1779157383 107858 9f2d9c3774234e139d4a36600844dc11 "pdflatex"
+["biber informe"] 1779157330.75331 "informe.bcf" "informe.bbl" "informe" 1779159041.62935 0
+  "informe.bcf" 1779159040 107858 9f2d9c3774234e139d4a36600844dc11 "pdflatex"
   "sample.bib" 1779157322 298 1ad36830666341825f474931ec905c81 ""
   (generated)
   "informe.bbl"
   "informe.blg"
   (rewritten before read)
-["pdflatex"] 1779157381.58058 "c:/Users/ritam/OneDrive/Documentos/ITBA/2026-1C/TME/TME/TP2/informe/informe.tex" "informe.pdf" "informe" 1779157384.4687 0
+["pdflatex"] 1779159036.36128 "c:/Users/ritam/OneDrive/Documentos/ITBA/2026-1C/TME/TME/TP2/informe/informe.tex" "informe.pdf" "informe" 1779159041.63199 0
   "C:/Users/ritam/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1779156771 82507 a9eef8696c92627b87e9975edea03b2a ""
   "C:/Users/ritam/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcbx2074.pk" 1755438496 28420 9c8b253034f91495cc0ea426149bd669 ""
   "C:/Users/ritam/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1000.pk" 1774386501 11548 13dfdabf2fba88e76fa06b774fb1e533 ""
@@ -257,12 +257,12 @@
   "FOTOS/POSICION2.jpg" 1779155054 177225 0caeccddddebe819535f7e535631cf6f ""
   "FOTOS/POSICION3.jpg" 1779155054 244221 91b2d4084ea2ed8716c20cbbc820522b ""
   "Logo_ITBA.png" 1779155054 34082 18565f2ade26fe38705e2ad93c029b27 ""
-  "c:/Users/ritam/OneDrive/Documentos/ITBA/2026-1C/TME/TME/TP2/informe/informe.tex" 1779157378 16359 6d865f3e7b9b08c0e9617f6033598c5a ""
-  "informe.aux" 1779157383 3686 e9ae47fa5cb0ad9afd3e9894fe9157d5 "pdflatex"
+  "c:/Users/ritam/OneDrive/Documentos/ITBA/2026-1C/TME/TME/TP2/informe/informe.tex" 1779159034 16365 38b813ad53008a2716dddf226f0f231e ""
+  "informe.aux" 1779159040 3686 095c91c0f9bfad8224b339034f5c742f "pdflatex"
   "informe.bbl" 1779157333 1238 c436c1a8712aa30230b59c9440730d89 "biber informe"
-  "informe.out" 1779157383 556 750cb2ae3d951d825ec2affaa936dd25 "pdflatex"
-  "informe.run.xml" 1779157383 2419 aac18051f536fb090ac78c034eb130bc "pdflatex"
-  "informe.tex" 1779157378 16359 6d865f3e7b9b08c0e9617f6033598c5a ""
+  "informe.out" 1779159040 556 b147ee483f80f3bb2960df7426b14ad7 "pdflatex"
+  "informe.run.xml" 1779159040 2419 aac18051f536fb090ac78c034eb130bc "pdflatex"
+  "informe.tex" 1779159034 16365 38b813ad53008a2716dddf226f0f231e ""
   (generated)
   "informe.aux"
   "informe.bcf"

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.8.17)  18 MAY 2026 23:23
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.8.17)  18 MAY 2026 23:50
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1464,9 +1464,9 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.183 
-       [1 <./FOTOS/POSICION1.jpg> <./FOTOS/POSICION2.jpg> <./FOTOS/POSICION3.jp
-g>]
+l.186 \begin{equation}
+                       [1 <./FOTOS/POSICION1.jpg> <./FOTOS/POSICION2.jpg> <./FO
+TOS/POSICION3.jpg>]
 
 LaTeX Warning: Command \textdegree invalid in math mode on input line 194.
 
@@ -1485,9 +1485,7 @@ Missing character: There is no ° in font cmr7!
 
 [2]
 
-[3]
-
-[4] (informe.aux
+[3] (informe.aux
 LaTeX Info: Redefining \sptext on input line 12.
 LaTeX Info: Redefining \. on input line 12.
 LaTeX Info: Redefining \% on input line 12.
@@ -1497,19 +1495,19 @@ LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-07-20>
  ***********
 Package rerunfilecheck Info: File `informe.out' has not changed.
-(rerunfilecheck)             Checksum: 750CB2AE3D951D825EC2AFFAA936DD25;556.
+(rerunfilecheck)             Checksum: B147EE483F80F3BB2960DF7426B14AD7;556.
 Package logreq Info: Writing requests to 'informe.run.xml'.
 \openout1 = `informe.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 63570 strings out of 468134
- 1608731 string characters out of 5430740
- 2741346 words of memory out of 5000000
- 91526 multiletter control sequences out of 15000+600000
- 633461 words of font info for 63 fonts, out of 8000000 for 9000
+ 63567 strings out of 468134
+ 1608690 string characters out of 5430740
+ 2742346 words of memory out of 5000000
+ 91524 multiletter control sequences out of 15000+600000
+ 632855 words of font info for 61 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 99i,13n,105p,817b,2003s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 99i,13n,105p,817b,1852s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\ritam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm
 1000.pk> <C:\Users\ritam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi60
 0\tcbx2074.pk><C:/Users/ritam/AppData/Local/Programs/MiKTeX/fonts/type1/public/
@@ -1526,9 +1524,9 @@ cmsy10.pfb><C:/Users/ritam/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
 fonts/cm/cmsy7.pfb><C:/Users/ritam/AppData/Local/Programs/MiKTeX/fonts/type1/pu
 blic/amsfonts/cm/cmti10.pfb><C:/Users/ritam/AppData/Local/Programs/MiKTeX/fonts
 /type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on informe.pdf (5 pages, 759782 bytes).
+Output written on informe.pdf (4 pages, 759176 bytes).
 PDF statistics:
- 147 PDF objects out of 1000 (max. 8388607)
- 17 named destinations out of 1000 (max. 500000)
+ 143 PDF objects out of 1000 (max. 8388607)
+ 16 named destinations out of 1000 (max. 500000)
  73 words of extra memory for PDF output out of 10000 (max. 10000000)
 
