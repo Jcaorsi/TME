@@ -19,6 +19,8 @@
 \pgfplotsset{compat=1.18}
 \usepackage{booktabs} % Para tablas con tematica de paper cientifico
 \usepackage{siunitx}  % Para alinear números en las tablas d:
+\usepackage[backend=biber, style=ieee]{biblatex} % referencias
+\addbibresource{sample.bib} %archivo con referencias
 
 %%%%%%%%%%%%%%%%%%% VARIABLES %%%%%%%%%%%%%%%%%%%%
 \newcommand{\Facultad}{Instituto Tecnológico \\de\\ Buenos Aires} %constantes
@@ -81,12 +83,12 @@
 
 \section{Resumen}
 
-En este trabajo práctico, se buscó caracterizar el comportamiento de un disipador brindado por la cátedra aplicando nuestro conocimiento. Para ello, se evaluó la potencia que el mismo podía disipar recurriendo al integrado LM317, el cual posee un regulador interno que limita corriente si se superan los 125 ºC. Con esto se evaluaron distintas configuraciones para observar cuales eran las que más calor disipaban.
+En este trabajo práctico, se buscó caracterizar el comportamiento de un disipador brindado por la cátedra aplicando nuestro conocimiento. Para ello, se evaluó la potencia que el mismo podía disipar recurriendo al integrado LM317, el cual posee un regulador interno que limita corriente si se superan los 125 °C. Con esto se evaluaron distintas configuraciones para observar cuales eran las que más calor disipaban.
 
 
 \section{Disipador}
 
-En este caso se trabajó con un disipador de tipo estampado(Observar figuras \ref{fig:P1}, \ref{fig:P2} y {fig:P3}). Luego, para evaluar la disipación del mismo bajo distintas circunstancias se midieron distintos parámetros usando las tres posiciones que figuran en las imágenes.
+En este caso se trabajó con un disipador de tipo estampado(Observar figuras \ref{fig:P1}, \ref{fig:P2} y \ref{fig:P3}). Luego, para evaluar la disipación del mismo bajo distintas circunstancias se midieron distintos parámetros usando las tres posiciones que figuran en las imágenes.
 
 \begin{figure}[h!]
     \centering
@@ -107,11 +109,14 @@ En este caso se trabajó con un disipador de tipo estampado(Observar figuras \re
     \begin{minipage}[b]{0.3\textwidth}
         \centering
     	\includegraphics[width=0.8\textwidth]{FOTOS/POSICION2.jpg}
-        \caption{Posicion 2. Inductor inclunado 45º respecto a la vertical. LM317 conectado del lado contrario a las aletas.}
+        \caption{Posicion 2. Inductor inclunado 45° respecto a la vertical. LM317 conectado del lado contrario a las aletas.}
         \label{fig:P2}
     \end{minipage}
     \hfill
-        \begin{minipage}[b]{0.3\textwidth}
+    %-------------------------
+    %   FIGURA 3
+    %-------------------------
+    \begin{minipage}[b]{0.3\textwidth}
         \centering
     	\includegraphics[width=0.8\textwidth]{FOTOS/POSICION3.jpg}
         \caption{Posición 3. Inductor parado con el LM317 conectado del lado contrario al de las aletas.}
@@ -122,7 +127,7 @@ En este caso se trabajó con un disipador de tipo estampado(Observar figuras \re
 
 
 
-\section{Cálculos Realizados}
+\section{Cálculos Y Resultados}
 Para analizar la potencia disipada por el transformador, se trabajó con el siguiente circuito (Observar figura: \ref{fig:circuito_termico}):
 
 \begin{figure}[H]
@@ -174,7 +179,7 @@ Para analizar la potencia disipada por el transformador, se trabajó con el sigu
     \label{fig:circuito_termico}
 \end{figure}
 
-Luego se midieron los valores de tensión y de corriente máximos que el chip era capaz de brindar. De esta manera, puesto a que el chip posee un regulador que limita la corriente al alcanzar los 125ºC, se podía conocer con mayor exactitud la temperatura interna del circuito. Al mismo tiempo se midió la temperatura del laboratorio de 24,5 ºC. 
+Luego se midieron los valores de tensión y de corriente máximos que el chip era capaz de brindar. De esta manera, puesto a que el chip posee un regulador que comienza a limitar la corriente al alcanzar los 125°C (en la práctica veremos que esto no es así), se podía conocer con mayor exactitud la temperatura interna del circuito. Al mismo tiempo se midió la temperatura del laboratorio de 24,5 °C. 
 
 Luego se despejaron las dos siguientes ecuaciones:
 
@@ -186,7 +191,7 @@ Luego se despejaron las dos siguientes ecuaciones:
 \frac{\Delta T}{VI} - R_{\theta jc} - R_{\theta cs} = R_{\theta sa}
 \end{equation}
 
-Se tuvo en consideración el valor de $R_{\theta jc} = 5 \frac{W}{ºC}$ brindado por el fabricante ST y se calculó la resistencia $R_{\theta cs}= 1,92 \frac{W}{ºC}$ para el caso de la pasta térmica. Se uso 0,1mm de pasta térmica a la hora de posicionar los componentes.  También se considero usar $T_j = 190^\circ C$ puesto que la cátedra nos recomendó este valor aproximado. Esto se debe a que el valor de $125^\circ C$ es una recomendación del fabricante pero no el valor real de temperatura interna del componente.
+Se tuvo en consideración el valor de $R_{\theta jc} = 5 \frac{W}{°C}$ brindado por el fabricante ST (\cite{LM317}) y se calculó la resistencia $R_{\theta cs}= 1,92 \frac{W}{°C}$ para el caso de la pasta térmica. Se uso 0,1mm de grosor pasta térmica a la hora de posicionar los componentes.  También se considero usar $T_j = 190^\circ C$ puesto que a temperaturas menores, la resistencia térmica carcasa-ambiente resultaba negativa, indicando que la temperatura de juntura alcanzaba niveles mayores a los recomendados de operación. Esto se debe a que el valor de $125^\circ C$ es una recomendación del fabricante pero no el valor real de temperatura interna del componente.
 
 %%%%TABLAS PARALELAS 1
 
@@ -293,12 +298,11 @@ Viendo los datos recolectados, en los casos en los cuales habían menos potencia
 
 Al estudiar experimentalmente la capacidad disipación del disipador, se observó que varios aspectos teóricos se cumplieron. En particular que al eliminar el aire estático o que al aumentar la temperatura del disipador o que al utilizar una ventilación forzada, la resistencia térmica del conjunto disipador carcasa disminuía en gran manera. Esto llevó a una mayor disipación de calor.
 
-Por otra parte, se observó que al estudiar parámetros los cuales diferían en menor medida, en particular la resistencia térmica de los distintos casos bajo las mismas condiciones, hubieron mayores discrepancias con lo visto teóricamente. Esto se puede adjudicar a que al ser diferencias mucho más chicas que las mencionadas en el párrafo anterior, estas pueden ser alteradas de forma mucho más sencillas por agentes externos.
+La sutileza de variaciones en las posiciones del disipador respecto al transistor generan que haya variaciones menores bajo condiciones iguales para las distintas configuraciones; ligeras diferencias en las condiciones ambientales generan variaciones apreciables en las resistencias térmicas que se adicionan perceptiblemente a las diferencias inherentes a la variación del posicionamiento. Sin embargo, las diferencias al agregar pasta térmica y luego al agregar ventilación son sustanciales, de manera que se considera que se pudo observar adecuadamente los efectos estudiados en clase.
 
 
 
- 
- 
+\printbibliography
 
 
 

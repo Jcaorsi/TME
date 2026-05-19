@@ -44,7 +44,7 @@
 \usepackage{booktabs} % Para tablas con tematica de paper cientifico
 \usepackage{siunitx}  % Para alinear números en las tablas d:
 \usepackage{grffile}
-\usepackage{comment} %permite hacer comentrios 
+\usepackage{comment} %permite hacer comentrios
 
 
 \setcounter{page}{1} % The page number of the first page, set this to a higher number if the article is to be part of an issue or larger work
@@ -115,10 +115,10 @@ Cada resistencia se calcula de la siguiente manera:
 \end{equation*}
 donde Q es el calor disipado, es decir Q=VI.
 
-Obtener $R_{\theta_{cs}}$ y $R_{\theta_{sa}}$ por separado implicaría conocer las temperaturas de la carcasa del transistor ($T_j$) y de la superficie del disipador que se encuentra en contacto con el transistor ($T_s$). Sin embargo, la medición de estas temperaturas se consideró altamente imprecisa con los instrumentos disponibles en el laboratorio, por lo que se opto por dar por conocidas únicamente la temperatura ambiente y la temperatura de juntura. Dado que $ R_{\theta_{jc}} $ es un valor que se encuentra en la hoja de datos, se obtuvo
+Obtener $R_{\theta_{cs}}$ y $R_{\theta_{sa}}$ por separado implicaría conocer las temperaturas de la carcasa del transistor ($T_j$) y de la superficie del disipador que se encuentra en contacto con el transistor ($T_s$). Sin embargo, la medición de estas temperaturas se consideró altamente imprecisa con los instrumentos disponibles en el laboratorio, por lo que se opto por dar por conocidas únicamente la temperatura ambiente y la temperatura de juntura. Dado que $ R_{\theta_{jc}} $ es un valor que se encuentra en la hoja de datos (\cite{LM317}), se obtuvo
 
 \begin{align*}
-    R_{\theta} &= \frac{T_j - T_a}{VI} \\
+    R_{\theta_{total}} &= \frac{T_j - T_a}{VI} \\
     \Rightarrow R_{\theta_{jc}} + R_{\theta_{cs}} + R_{\theta_{sa}} &= \frac{T_j - T_a}{VI} \\
     \Rightarrow R_{\theta_{jc}} + R_{\theta_{ca}} &= \frac{T_j - T_a}{VI} \\
     \Rightarrow R_{\theta_{ca}} = \frac{T_j - T_a}{VI} - R_{\theta_{jc}}
@@ -133,14 +133,15 @@ Para encontrar una temperatura de juntura coherente, se buscó que para todas la
     T_j > R_{\theta_{jc}} \cdot VI + T_a
 \end{align*}
 
-es decir que se buscó la mínima temperatura de juntura que cumpliera con esta condición. Esta temperatura, para las mediciones realizadas, valió 180°C.
+es decir que se buscó la mínima temperatura de juntura que cumpliera con esta condición. Esta temperatura, para las mediciones realizadas, valió 900°C.
 
 Por otro lado, con la adición de la grasa siliconada, se tomó que $ R_{\theta_{cs}} $ es la resistencia térmica de la propia grasa, la cual se podría calcular mediante la ecuación \ref{resistenciaGrasa}
 \begin{equation*} \label{resistenciaGrasa}
     R_{\theta_{cs}} = \frac{l}{\sigma A}
 \end{equation*}
-donde $\sigma$ es la conductividad de la grasa térmica (tomada de la hoja de datos), l el espesor de la misma y A el área de aplicación. Se tomó que l=0,1 mm, y para calcular A se tomó el área completa del transistor menos el área del agujero circular hecho para atornillar. Puesto que una menor resistencia térmica indica que a una misma temperatura se disipa más calor, se considera que una menor resistencia térmica es más favorable, y por ende el ``peor escenario'' es el de menor área (puesto que a menor área, mayor resistencia térmica). Por esto, se tomaron los valores mínimos que indicaban las tolerancias para calcular el área.
+donde $\sigma$ es la conductividad de la grasa térmica (tomada de la hoja de datos \cite{GrasaTermica}), l el espesor de la misma y A el área de aplicación. Se tomó que l=0,1 mm, y para calcular A se tomó el área completa del transistor menos el área del agujero circular hecho para atornillar. Puesto que una menor resistencia térmica indica que a una misma temperatura se disipa más calor, se considera que una menor resistencia térmica es más favorable, y por ende el ``peor escenario'' es el de menor área (puesto que a menor área, mayor resistencia térmica). Por esto, se tomaron los valores mínimos que indicaban las tolerancias de la hoja de datos del transistor (\cite{LM317}) para calcular el área.
 \\ En estos casos, se despejó ya no $R_{\theta_{ca}}$ sino $R_{\theta_{sa}}$, puesto que $R_{\theta_{sa}} =\frac{T_j - T_a}{VI} - R_{\theta_{jc}} - R_{\theta_{cs}} $.
 
+\printbibliography
 
 \end{document}
