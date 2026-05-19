@@ -81,12 +81,12 @@
 
 \section{Resumen}
 
-En este trabajo práctico, se buscó caracterizar el comportamiento de un disipador brindado por la catedra aplicando nuestro conocimiento. Para ello, se evaluó la potencia que el mismo podía disipar recurriendo al integrado LM317, el cual posee un regulador interno que limita corriente si se superan los 120 ºC. Con esto se evaluaron distintas configuraciones para observar cuales eran las que más calor disipaban.
+En este trabajo práctico, se buscó caracterizar el comportamiento de un disipador brindado por la cátedra aplicando nuestro conocimiento. Para ello, se evaluó la potencia que el mismo podía disipar recurriendo al integrado LM317, el cual posee un regulador interno que limita corriente si se superan los 125 ºC. Con esto se evaluaron distintas configuraciones para observar cuales eran las que más calor disipaban.
 
 
-\section{Inductor}
+\section{Disipador}
 
-En este caso se trabajo con un inductor de tipo estampado(Observar figuras \ref{fig:P1}, \ref{fig:P2} y {fig:P3}). Luego, para evaluar la disipación del mismo bajo distintas circunstancias se midieron distintos parametros usando las tres posiciones que figuran en las imagenes.
+En este caso se trabajó con un disipador de tipo estampado(Observar figuras \ref{fig:P1}, \ref{fig:P2} y {fig:P3}). Luego, para evaluar la disipación del mismo bajo distintas circunstancias se midieron distintos parámetros usando las tres posiciones que figuran en las imágenes.
 
 \begin{figure}[h!]
     \centering
@@ -97,7 +97,7 @@ En este caso se trabajo con un inductor de tipo estampado(Observar figuras \ref{
     \begin{minipage}[b]{0.3\textwidth}
         \centering
     	\includegraphics[width=0.8\textwidth]{FOTOS/POSICION1.jpg}
-        \caption{Posición 1. Inductor parado con el LM317 conectado del lado de las aletas.}
+        \caption{Posición 1. Inductor parado verticalmente con el LM317 conectado del lado de las aletas.}
         \label{fig:P1}
     \end{minipage}
     \hfill
@@ -122,11 +122,12 @@ En este caso se trabajo con un inductor de tipo estampado(Observar figuras \ref{
 
 
 
-\section{Analisis}
+\section{Cálculos Realizados}
 Para analizar la potencia disipada por el transformador, se trabajó con el siguiente circuito (Observar figura: \ref{fig:circuito_termico}):
 
 \begin{figure}[H]
-    \begin{centering}
+    \centering
+    \resizebox{0.62\linewidth}{!}{
     \begin{tikzpicture}[transform shape]
 	% Paths, nodes and wires:
 	\draw (3.75, 3) to[american current source] (3.75, 5);
@@ -139,24 +140,167 @@ Para analizar la potencia disipada por el transformador, se trabajó con el sigu
 	\draw (5, 5) -- (3.75, 5);
 	\node[plain crossing] at (5, 4.39){};
 	\draw (4.888, 3.25) -- (5.138, 3.25);
-	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm](Tj) at (5, 3.862){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (4.625, 4.112){$T_j$\\};
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm](Tj) at (5, 3.862){} 
+	node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (4.625, 4.112){$T_j$\\};
+
 	\node[plain crossing] at (7.5, 4.39){};
 	\draw (7.388, 3.25) -- (7.638, 3.25);
-	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm] at (7.5, 3.862){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (7.125, 4.112){$T_c$\\};
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm] at (7.5, 3.862){} 
+	node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (7.125, 4.112){$T_c$\\};
+
 	\node[plain crossing] at (10, 4.39){};
 	\draw (9.888, 3.25) -- (10.138, 3.25);
-	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm] at (10, 3.862){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (9.625, 4.112){$T_s$};
-	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm] at (12.75, 4.25){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (12.375, 4.5){$T_a$};
-	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm] at (3, 4.25){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (2.625, 4.5){Q\\};
-	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm] at (6.125, 5.5){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (5.75, 5.9){$ T_{\theta_{jc}} $};
-	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm] at (8.75, 5.5){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (8.375, 5.9){$ T_{\theta_{cs}} $};
-	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm] at (10.875, 5.5){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (10.5, 5.9){$ T_{\theta_{sa}} $};
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm] at (10, 3.862){} 
+	node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (9.625, 4.112){$T_s$};
+
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm] at (12.75, 4.25){} 
+	node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (12.375, 4.5){$T_a$};
+
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm] at (3, 4.25){} 
+	node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (2.625, 4.5){Q\\};
+
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm] at (6.125, 5.5){} 
+	node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (5.75, 5.9){$ R_{\theta_{jc}} $};
+
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm] at (8.75, 5.5){} 
+	node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (8.375, 5.9){$ R_{\theta_{cs}} $};
+
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm] at (10.875, 5.5){} 
+	node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (10.5, 5.9){$ R_{\theta_{sa}} $};
+
     \end{tikzpicture}
-    \caption{Circuito Térmico equivalente con disipador.}
+    }
+    \caption{Circuito térmico equivalente con disipador.}
     \label{fig:circuito_termico}
-    \end{centering}
 \end{figure}
 
-Luego se midieron los valores de tensión y de corriente máximos que el chip era capaz de brindar. De esta manera, puesto a que el chip posee un regulador que limita la corriente al alcanzar los 120ºC, se podía conocer con mayor exactitud la temperatura interna del circuito. Al mismo tiempo se midió la temperatura del laboratorio de 24,5 ºC.
+Luego se midieron los valores de tensión y de corriente máximos que el chip era capaz de brindar. De esta manera, puesto a que el chip posee un regulador que limita la corriente al alcanzar los 125ºC, se podía conocer con mayor exactitud la temperatura interna del circuito. Al mismo tiempo se midió la temperatura del laboratorio de 24,5 ºC. 
+
+Luego se despejaron las dos siguientes ecuaciones:
+
+\begin{equation}
+\frac{\Delta T}{VI} - R_{\theta jc} = R_{\theta ca}
+\end{equation}
+
+\begin{equation}
+\frac{\Delta T}{VI} - R_{\theta jc} - R_{\theta cs} = R_{\theta sa}
+\end{equation}
+
+Se tuvo en consideración el valor de $R_{\theta jc} = 5 \frac{W}{ºC}$ brindado por el fabricante ST y se calculó la resistencia $R_{\theta cs}= 1,92 \frac{W}{ºC}$ para el caso de la pasta térmica. Se uso 0,1mm de pasta térmica a la hora de posicionar los componentes.  También se considero usar $T_j = 190^\circ C$ puesto que la cátedra nos recomendó este valor aproximado. Esto se debe a que el valor de $125^\circ C$ es una recomendación del fabricante pero no el valor real de temperatura interna del componente.
+
+%%%%TABLAS PARALELAS 1
+
+\begin{table}[h!]
+    \centering
+    \small 
+    \setlength{\tabcolsep}{3pt} % Un poco más de aire entre columnas
+
+    % --- TABLA 1 (Izquierda) ---
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \resizebox{\textwidth}{!}{% <--- Esto ajusta el ancho automáticamente
+        \begin{tabular}{ccccc}
+            \toprule
+            Posición & Tensión (V) & Corriente (A) & Potencia & Rca \\
+            \midrule
+            1 & 2,32 & 2 & 4,64 & 30,67 \\
+            2 & 2,1 & 2 & 4,2 & 34,40 \\
+            3 (ideal) & 2,13 & 2 & 4,26 & 33,85\\
+            \bottomrule
+        \end{tabular}}
+        \caption{Sin pasta ($T_a = 24,5^\circ C, T_j = 190^\circ C$)}
+        \label{tab:sinpasta}
+    \end{minipage}
+    \hfill 
+    % --- TABLA 2 (Derecha) ---
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \resizebox{\textwidth}{!}{% <--- Esto ajusta el ancho automáticamente
+        \begin{tabular}{cccccc}
+            \toprule
+            Posición & Tensión (V) & Corriente (A) & Potencia & Rca & Rsa \\
+            \midrule
+            1 & 30,9 & 0,55 & 16,995 & 4,77& 2,85 \\
+            2 & 31 & 0,67 & 20,77 & 2,99& 1,07 \\
+            3 (ideal) & 30,9 & 0,46 & 14,214 & 6,68 & 4,76 \\
+            \bottomrule
+        \end{tabular}}
+        \caption{Con pasta ($T_a = 24,5^\circ C, T_j = 190^\circ C$)}
+        \label{tab:conpasta}
+    \end{minipage}
+\end{table}
+
+%%%TABLAS PARALELAS 2
+
+\begin{table}[h!]
+    \centering
+    \small 
+    \setlength{\tabcolsep}{3pt} 
+
+    % --- TABLA 3 (Izquierda: Pasta + Ventilador) ---
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \resizebox{\textwidth}{!}{%
+        \begin{tabular}{cccccc}
+            \toprule
+            Posición & Tensión (V) & Corriente (A) & Potencia & Rca & Rsa \\
+            \midrule
+            2 & 30,9 & 0,75 & 23,18 & 2,14 & 0,22 \\
+            3 & 30,8 & 0,77 & 23,72 & 1,98 & 0,06 \\
+            1 & 31 & 0,68 & 21,08 & 2,85 & 0,93 \\
+            \bottomrule
+        \end{tabular}}
+        \caption{Pasta + Ventilador. ($T_a = 24,5^\circ C, T_j = 190^\circ C$)}
+        \label{tab:conpastayventilador}
+    \end{minipage}
+    \hfill 
+    % --- TABLA 4 (Derecha: Con pasta, posición 3) ---
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \resizebox{\textwidth}{!}{%
+        \begin{tabular}{ccccc} % Se cambió a 5 columnas (ccccc)
+            \toprule
+            Tensión (V) & Corriente (A) & Potencia & Rca & Rsa \\
+            \midrule
+            24,5 & 0,58 & 14,21  & 4,73 & 2,81 \\
+            18,7 & 0,74 & 13,84 & 5,04 & 3,12 \\
+            12,2 & 1,15 & 14,03  & 4,88& 2,96 \\
+            8,8  & 1,6  & 14,08  & 4,83 & 2,92 \\
+            4    & 2,4  & 9,6    & 10,32 & 8,40 \\
+            \bottomrule
+        \end{tabular}}
+        \caption{Con pasta, posición 3 a distintas potencias}
+        \label{tab:conpastadistpot}
+    \end{minipage}
+\end{table}
+
+
+\section{Análisis de datos}
+
+Luego de todas las mediciones se observó los siguientes resultados.\par
+ Primero al comparar las tablas \ref{tab:sinpasta} y \ref{tab:conpasta}, se comprobó que al añadir pasta térmica efectivamente disminuía drásticamente la resistencia $R_{ca}$. Esto demuestra experimentalmente que el aire estático atrapado entre el disipador y el componente posee una gran resistencia térmica la cual impide la disipación correcta del calor. Por tal motivo, al añadir pasta térmica la cual elimina este aire estático, permitiendo una mejor conducción de calor, desemboca en una gran reducción de la resistencia $R_{ca}$ . En particular se pudo observar una reducción promedio de la resistencia $R_{ca}$ del 87\%. \par
+ 
+ Al añadir el ventilador, se observó que la resistencia térmica disminuía aun más (Observar tabla \ref{tab:conpastayventilador}). De esta manera se verificó lo visto en la teoría: un mayor flujo de aire aumenta la capacidad disipación del disipador. Consecuentemente, esto causó una reducción en la resistencia $R_{ca}$. Esto se debe a que el ventilador fuerza un flujo de aire fresco constante al disipador, por lo que existe una mayor cantidad de aire la cual puede absorber calor.\par
+ 
+ Por otra parte, se observó una discrepancia entre la teoría y las mediciones prácticas. Al evaluar las disipaciones sin pasta térmica, se esperaba teóricamente que la forma 3 fuera la que mejor disipaba. No obstante se observó experimentalmente que la forma 1 fue la que mejor disipó el calor en el caso que no se tenía pasta térmica. Luego se observó que la forma 2, la cual teóricamente era la que peor disipaba, fue la que menor resistencia térmica tenía al poner pasta térmica. Finalmente se observó que la forma que mejor disipaba el calor teóricamente, fue la que mejor disipó el calor en el caso de tener disipación forzada. \par
+ 
+ Esto se puede explicar a que si bien se trató de controlar el ambiente de medición, no se pudo aislar completamente el sistema frente a fuentes externas como las corrientes de aire de la ventilación o fuentes de aires de los disipadores de los equipos usados para medir (Ventiladores de las fuentes de tensión). Debido a que la diferencia de los valores no fueron muy grandes, se considera que estos pequeños factores externos pudieron causar estos desvíos. Otro factor de error fue la imposibilidad de poder medir con exactitud el valor interno de temperatura $T_j$. 
+ 
+Finalmente, se evaluó el mejor caso teórico usando distintas potencias. Es importante mencionar primero que la convección depende en gran medida de la diferencia de temperatura. Esto se debe a que la convección genera un flujo de aire causado por la diferencia de densidad generada por la diferencia de temperatura. Consecuentemente, a mayor temperatura se debería observar una menor resistencia térmica. Observando la tabla \ref{tab:conpastadistpot}, se observó que esto se cumplía. \par
+Viendo los datos recolectados, en los casos en los cuales habían menos potencia disipada, el sistema obtuvo una resistencia térmica mayor, mientras que en los casos donde existía un flujo mayor de calor, la resistencia térmica fue menor. Todo esto se pudo observar a distintas tensiones aplicadas.
+
+\section{Conclusión}
+
+Al estudiar experimentalmente la capacidad disipación del disipador, se observó que varios aspectos teóricos se cumplieron. En particular que al eliminar el aire estático o que al aumentar la temperatura del disipador o que al utilizar una ventilación forzada, la resistencia térmica del conjunto disipador carcasa disminuía en gran manera. Esto llevó a una mayor disipación de calor.
+
+Por otra parte, se observó que al estudiar parámetros los cuales diferían en menor medida, en particular la resistencia térmica de los distintos casos bajo las mismas condiciones, hubieron mayores discrepancias con lo visto teóricamente. Esto se puede adjudicar a que al ser diferencias mucho más chicas que las mencionadas en el párrafo anterior, estas pueden ser alteradas de forma mucho más sencillas por agentes externos.
+
+
+
+ 
+ 
+
+
 
 \end{document}
+

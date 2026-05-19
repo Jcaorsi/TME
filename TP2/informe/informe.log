@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.11.27)  17 MAY 2026 20:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.11.27)  18 MAY 2026 21:46
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1046,7 +1046,7 @@ nslations-basic-dictionary')
 )
 Package translations Info: loading dictionary `translations-basic-dictionary' f
 or `spanish'. on input line 47.
-<Logo_ITBA.png, id=19, 557.08125pt x 220.825pt>
+<Logo_ITBA.png, id=27, 557.08125pt x 220.825pt>
 File: Logo_ITBA.png Graphic file (type png)
 <use Logo_ITBA.png>
 Package pdftex.def Info: Logo_ITBA.png  used on input line 53.
@@ -1056,54 +1056,54 @@ Package pdftex.def Info: Logo_ITBA.png  used on input line 53.
 {/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/loc
 al/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc} <./Logo_I
 TBA.png>]
-<FOTOS/POSICION1.jpg, id=33, 902.37125pt x 694.595pt>
+<FOTOS/POSICION1.jpg, id=41, 902.37125pt x 694.595pt>
 File: FOTOS/POSICION1.jpg Graphic file (type jpg)
 <use FOTOS/POSICION1.jpg>
 Package pdftex.def Info: FOTOS/POSICION1.jpg  used on input line 99.
 (pdftex.def)             Requested size: 106.46031pt x 81.93817pt.
-<FOTOS/POSICION2.jpg, id=34, 897.3525pt x 694.595pt>
+<FOTOS/POSICION2.jpg, id=42, 897.3525pt x 694.595pt>
 File: FOTOS/POSICION2.jpg Graphic file (type jpg)
 <use FOTOS/POSICION2.jpg>
 Package pdftex.def Info: FOTOS/POSICION2.jpg  used on input line 109.
 (pdftex.def)             Requested size: 106.46031pt x 82.40451pt.
-<FOTOS/POSICION3.jpg, id=35, 900.36375pt x 694.595pt>
+<FOTOS/POSICION3.jpg, id=43, 900.36375pt x 694.595pt>
 File: FOTOS/POSICION3.jpg Graphic file (type jpg)
 <use FOTOS/POSICION3.jpg>
 Package pdftex.def Info: FOTOS/POSICION3.jpg  used on input line 116.
 (pdftex.def)             Requested size: 106.46031pt x 82.12895pt.
 
-Overfull \hbox (0.75339pt too wide) in paragraph at lines 142--142
+Overfull \hbox (0.75339pt too wide) in paragraph at lines 172--172
 [][]$\OML/cmm/m/it/10 T[]$  
  []
 
 
-Overfull \hbox (0.61357pt too wide) in paragraph at lines 145--145
+Overfull \hbox (0.61357pt too wide) in paragraph at lines 172--172
 [][]$\OML/cmm/m/it/10 T[]$  
  []
 
 
-Overfull \hbox (0.81415pt too wide) in paragraph at lines 148--148
+Overfull \hbox (0.81415pt too wide) in paragraph at lines 172--172
 [][]$\OML/cmm/m/it/10 T[]$  
  []
 
 
-Overfull \hbox (1.37747pt too wide) in paragraph at lines 149--149
+Overfull \hbox (1.37747pt too wide) in paragraph at lines 172--172
 [][]$\OML/cmm/m/it/10 T[]$  
  []
 
 
-Overfull \hbox (7.83182pt too wide) in paragraph at lines 151--151
-[][]$\OML/cmm/m/it/10 T[]$  
+Overfull \hbox (9.58096pt too wide) in paragraph at lines 172--172
+[][]$\OML/cmm/m/it/10 R[]$  
  []
 
 
-Overfull \hbox (7.94669pt too wide) in paragraph at lines 152--152
-[][]$\OML/cmm/m/it/10 T[]$  
+Overfull \hbox (9.69583pt too wide) in paragraph at lines 172--172
+[][]$\OML/cmm/m/it/10 R[]$  
  []
 
 
-Overfull \hbox (8.5717pt too wide) in paragraph at lines 153--153
-[][]$\OML/cmm/m/it/10 T[]$  
+Overfull \hbox (10.32085pt too wide) in paragraph at lines 172--172
+[][]$\OML/cmm/m/it/10 R[]$  
  []
 
 
@@ -1111,9 +1111,28 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.159 
+l.178 
        [1 <./FOTOS/POSICION1.jpg> <./FOTOS/POSICION2.jpg> <./FOTOS/POSICION3.jp
-g>] [2] (./informe.aux
+g>]
+
+LaTeX Warning: Command \textordmasculine invalid in math mode on input line 189
+.
+
+
+LaTeX Warning: Command \textordmasculine invalid in math mode on input line 189
+.
+
+Missing character: There is no º in font cmr7!
+
+LaTeX Warning: Command \textordmasculine invalid in math mode on input line 189
+.
+
+
+LaTeX Warning: Command \textordmasculine invalid in math mode on input line 189
+.
+
+Missing character: There is no º in font cmr7!
+[2] [3] (./informe.aux
 LaTeX Info: Redefining \. on input line 11.
 LaTeX Info: Redefining \% on input line 11.
 )
@@ -1122,16 +1141,16 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2025-11-14>
  ***********
 Package rerunfilecheck Info: File `informe.out' has not changed.
-(rerunfilecheck)             Checksum: A9DF7DD4742DC56163CF8141AD471512;244.
+(rerunfilecheck)             Checksum: 766BD93BB1211FBC2EA78AEBDEB6F741;543.
  ) 
 Here is how much of TeX's memory you used:
- 56493 strings out of 467538
- 1462116 string characters out of 5419545
- 2185603 words of memory out of 5000000
- 84820 multiletter control sequences out of 15000+600000
- 631568 words of font info for 53 fonts, out of 8000000 for 9000
+ 56527 strings out of 467538
+ 1462570 string characters out of 5419545
+ 2191603 words of memory out of 5000000
+ 84840 multiletter control sequences out of 15000+600000
+ 633843 words of font info for 61 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 99i,11n,118p,728b,1089s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 99i,13n,118p,728b,1089s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
 ></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb
 ></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
@@ -1139,13 +1158,15 @@ Here is how much of TeX's memory you used:
 usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></us
 r/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/
 local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/lo
-cal/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/loc
-al/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx2074.pfb></usr/local
-/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on informe.pdf (3 pages, 685432 bytes).
+cal/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local
+/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/
+texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/te
+xlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx2074.pfb></usr/local/texl
+ive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
+Output written on informe.pdf (4 pages, 718449 bytes).
 PDF statistics:
- 100 PDF objects out of 1000 (max. 8388607)
- 69 compressed objects within 1 object stream
- 8 named destinations out of 1000 (max. 500000)
- 57 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 131 PDF objects out of 1000 (max. 8388607)
+ 95 compressed objects within 1 object stream
+ 15 named destinations out of 1000 (max. 500000)
+ 73 words of extra memory for PDF output out of 10000 (max. 10000000)
 
