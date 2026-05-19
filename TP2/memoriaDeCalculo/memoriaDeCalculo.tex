@@ -1,0 +1,146 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Journal Article
+% LaTeX Template
+% Version 2.0 (February 7, 2023)
+%
+% This template originates from:
+% https://www.LaTeXTemplates.com
+%
+% Author:
+% Vel (vel@latextemplates.com)
+%
+% License:
+% CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/)
+%
+% NOTE: The bibliography needs to be compiled using the biber engine.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[
+	a4paper, % Paper size, use either a4paper or letterpaper
+	10pt, % Default font size, can also use 11pt or 12pt, although this is not recommended
+	unnumberedsections, % Comment to enable section numbering
+	twoside, % Two side traditional mode where headers and footers change between odd and even pages, comment this option to make them fixed
+]{LTJournalArticle}
+
+\usepackage[backend=biber]{biblatex}
+\addbibresource{sample.bib} % BibLaTeX bibliography file
+\usepackage[thinc]{esdiff}
+\usepackage{amsmath}
+\usepackage{caption}
+\usepackage{physics}
+\usepackage{titlesec}
+\usepackage{titletoc}
+\usepackage{graphicx}
+\usepackage[spanish,es-tabla]{babel} % 'es-tabla' cambia Cuadro→Tabla
+\usepackage{hyperref}                % cargar después de babel
+\usepackage{float}
+\usepackage{circuitikz}
+\usepackage{subcaption}
+\usepackage{booktabs} % Para tablas con tematica de paper cientifico
+\usepackage{siunitx}  % Para alinear números en las tablas d:
+\usepackage{grffile}
+\usepackage{comment} %permite hacer comentrios 
+
+
+\setcounter{page}{1} % The page number of the first page, set this to a higher number if the article is to be part of an issue or larger work
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\title{Trabajo Práctico N°2: Disipadores} % Article title, use manual lines breaks (\\) to beautify the layout
+
+% Authors are listed in a comma-separated list with superscript numbers indicating affiliations
+% \thanks{} is used for any text that should be placed in a footnote on the first page, such as the corresponding author's email, journal acceptance dates, a copyright/license notice, keywords, etc
+\author{
+	Tecnología de Materiales Electrónicos (25.12) \\ \\  \Large{\textbf{Memoria de Cálculo}} \\ Grupo 2 \\ \small{19 de mayo, 2026} \\ \small{Curso 2026Q1}
+}
+
+% Affiliations are output in the \date{} command
+\date{\normalsize{Lucas Solar Grillo (63322) \\ Juan Bautista Correa Uranga (65016) \\ Juan Ignacio Caorsi (65532) \\ Rita Moschini (67026)}}
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Output the title section
+
+%----------------------------------------------------------------------------------------
+%	ARTICLE CONTENTS
+%----------------------------------------------------------------------------------------
+
+En este trabajo práctico, se buscó representar distintas configuraciones del conjunto transistor-disipador posicionando el transistor sobre el disipador de distintas formas, y representar cada una de ellas mediante el circuito térmico de la figura \ref{circuitoTermico}.
+
+\begin{figure}[H]
+    \begin{centering}
+    \begin{tikzpicture}[transform shape, scale=0.75]
+	% Paths, nodes and wires:
+	\draw (3.75, 3) to[american current source] (3.75, 5);
+	\draw (5, 5) to[american resistor] (7.5, 5);
+	\draw (7.5, 5) to[american resistor] (10, 5);
+	\draw (10, 5) to[american resistor] (12, 5);
+	\draw (12, 5) to[american voltage source] (12, 3);
+	\node[ground] at (3.75, 3.25){};
+	\node[ground] at (12, 3.25){};
+	\draw (5, 5) -- (3.75, 5);
+	\node[plain crossing] at (5, 4.39){};
+	\draw (4.888, 3.25) -- (5.138, 3.25);
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm](Tj) at (5, 3.862){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (4.625, 4.112){$T_j$\\};
+	\node[plain crossing] at (7.5, 4.39){};
+	\draw (7.388, 3.25) -- (7.638, 3.25);
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm] at (7.5, 3.862){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (7.125, 4.112){$T_c$\\};
+	\node[plain crossing] at (10, 4.39){};
+	\draw (9.888, 3.25) -- (10.138, 3.25);
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm] at (10, 3.862){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (9.625, 4.112){$T_s$};
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm] at (12.75, 4.25){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (12.375, 4.5){$T_a$};
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm] at (3, 4.25){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (2.625, 4.5){Q\\};
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm] at (6.125, 5.5){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (5.75, 5.9){$R_{\theta_{jc}}$};
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm] at (8.75, 5.5){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (8.375, 5.9){$R_{\theta_{cs}}$};
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm] at (10.875, 5.5){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (10.5, 5.9){$R_{\theta_{sa}}$};
+    \end{tikzpicture}
+    
+    \caption{Circuito térmico equivalente.}
+    \label{circuitoTermico}
+    \end{centering}
+\end{figure}
+
+Cada resistencia se calcula de la siguiente manera:
+\begin{equation*}
+    R_{\theta_{12}} = \frac{T_1 - T_2}{Q}
+\end{equation*}
+donde Q es el calor disipado, es decir Q=VI.
+
+Obtener $R_{\theta_{cs}}$ y $R_{\theta_{sa}}$ por separado implicaría conocer las temperaturas de la carcasa del transistor ($T_j$) y de la superficie del disipador que se encuentra en contacto con el transistor ($T_s$). Sin embargo, la medición de estas temperaturas se consideró altamente imprecisa con los instrumentos disponibles en el laboratorio, por lo que se opto por dar por conocidas únicamente la temperatura ambiente y la temperatura de juntura. Dado que $ R_{\theta_{jc}} $ es un valor que se encuentra en la hoja de datos, se obtuvo
+
+\begin{align*}
+    R_{\theta} &= \frac{T_j - T_a}{VI} \\
+    \Rightarrow R_{\theta_{jc}} + R_{\theta_{cs}} + R_{\theta_{sa}} &= \frac{T_j - T_a}{VI} \\
+    \Rightarrow R_{\theta_{jc}} + R_{\theta_{ca}} &= \frac{T_j - T_a}{VI} \\
+    \Rightarrow R_{\theta_{ca}} = \frac{T_j - T_a}{VI} - R_{\theta_{jc}}
+\end{align*}
+
+La temperatura ambiente en el momento en que fueron tomadas las mediciones era de 24,5°C.
+Para encontrar una temperatura de juntura coherente, se buscó que para todas las resistencias $ R_{\theta_{ca}} $ se cumpliera
+
+\begin{align*}
+    R_{\theta_{ca}} > 0 \\ 
+    \frac{T_j - T_a}{VI} - R_{\theta_{jc}} > 0 \\
+    T_j > R_{\theta_{jc}} \cdot VI + T_a
+\end{align*}
+
+es decir que se buscó la mínima temperatura de juntura que cumpliera con esta condición. Esta temperatura, para las mediciones realizadas, valió 180°C.
+
+Por otro lado, con la adición de la grasa siliconada, se tomó que $ R_{\theta_{cs}} $ es la resistencia térmica de la propia grasa, la cual se podría calcular mediante la ecuación \ref{resistenciaGrasa}
+\begin{equation*} \label{resistenciaGrasa}
+    R_{\theta_{cs}} = \frac{l}{\sigma A}
+\end{equation*}
+donde $\sigma$ es la conductividad de la grasa térmica (tomada de la hoja de datos), l el espesor de la misma y A el área de aplicación. Se tomó que l=0,1 mm, y para calcular A se tomó el área completa del transistor menos el área del agujero circular hecho para atornillar. Puesto que una menor resistencia térmica indica que a una misma temperatura se disipa más calor, se considera que una menor resistencia térmica es más favorable, y por ende el ``peor escenario'' es el de menor área (puesto que a menor área, mayor resistencia térmica). Por esto, se tomaron los valores mínimos que indicaban las tolerancias para calcular el área.
+\\ En estos casos, se despejó ya no $R_{\theta_{ca}}$ sino $R_{\theta_{sa}}$, puesto que $R_{\theta_{sa}} =\frac{T_j - T_a}{VI} - R_{\theta_{jc}} - R_{\theta_{cs}} $.
+
+
+\end{document}
