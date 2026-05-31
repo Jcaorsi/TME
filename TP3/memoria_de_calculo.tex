@@ -1,0 +1,95 @@
+\documentclass[conference, a4paper]{IEEEtran}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{cite}
+
+% Ajuste para evitar conflictos del paquete babel con IEEEtran
+\addto\captionsspanish{\renewcommand{\tablename}{Tabla}}
+\addto\captionsspanish{\renewcommand{\figurename}{Figura}}
+
+\begin{document}
+
+\title{Memoria de Cálculo: Trabajo Práctico N$^\circ$3 \\ Principios de Motores}
+
+\author{
+\IEEEauthorblockN{Lucas Solar Grillo (63322)}
+\IEEEauthorblockN{Juan Ignacio Caorsi (65532)}
+\IEEEauthorblockN{Rita Moschini (67026)}
+\IEEEauthorblockA{\textit{Grupo 2 - Curso 2026Q1} \\
+\textit{Tecnología de Materiales Electrónicos (25.12)}\\
+ITBA}
+}
+
+\maketitle
+
+\begin{abstract}
+En este trabajo práctico, se buscó representar el funcionamiento básico de un motor de corriente continua mediante la construcción y análisis de un prototipo experimental. Para lograr este objetivo, se construyó un rotor elemental compuesto por una bobina de cobre esmaltado suspendida sobre un campo magnético provisto por imanes de neodimio permanentes. 
+\end{abstract}
+
+\section{Introducción}
+A continuación, se detallan los parámetros constructivos adoptados y el desarrollo analítico de las variables eléctricas y magnéticas del sistema propuesto para este tercer trabajo práctico.
+
+\section{Parámetros Constructivos}
+Para la realización de los cálculos, se consideraron los siguientes datos constructivos del prototipo:
+\begin{itemize}
+    \item \textbf{Material del conductor:} Alambre de cobre esmaltado.
+    \item \textbf{Diámetro del conductor ($d$):} $0.2 \, \text{mm}$.
+    \item \textbf{Diámetro medio de la espira ($D$):} $3 \, \text{cm}$.
+    \item \textbf{Número de espiras ($N$):} $60$.
+    \item \textbf{Imán permanente:} Neodimio (diámetro $19.62 \, \text{mm}$, altura $5.6 \, \text{mm}$).
+    \item \textbf{Fuente de alimentación ($V_{fuente}$):} Pila alcalina tipo D de $1.5 \, \text{V}$.
+\end{itemize}
+
+\section{Resistencia Eléctrica de la Bobina}
+Para obtener la resistencia teórica del conductor, en primer lugar se determinó la longitud total ($L_{total}$) del alambre de cobre utilizado. Suponiendo espiras perfectamente circulares, la longitud se calcula como:
+\begin{equation}
+    L_{total} = N \cdot \pi \cdot D
+\end{equation}
+
+
+Conociendo la resistividad del cobre ($\rho_{Cu} \approx 1.72 \times 10^{-8} \, \Omega\cdot\text{m}$) y el área de la sección transversal del alambre ($A_{cable}$), la resistencia teórica ($R_{teo}$) está dada por:
+\begin{equation}
+    A_{cable} = \pi \cdot \left(\frac{d}{2}\right)^2 
+\end{equation}
+
+
+\begin{equation}
+    R_{teo} = \rho_{Cu} \frac{L_{total}}{A_{cable}}
+\end{equation}
+
+
+\textbf{Nota experimental:}Al realizar la medición directa sobre el componente construido, se registró una resistencia práctica de \textbf{3.9 ohmios}. La diferencia respecto al valor teórico puede atribuirse al error humano al medir el largo del cable, resistencias parásitas en los extremos pelados de la bobina. Para los siguientes cálculos se utilizará el valor real medido de $R = 3.9 \, \Omega$.
+
+\section{Corriente de la Bobina}
+La corriente continua ($I$) suministrada al sistema en el momento de contacto pleno del colector se calcula mediante la Ley de Ohm, asumiendo una fuente de tensión ideal de $1.5 \, \text{V}$:
+\begin{equation}
+    I = \frac{V_{fuente}}{R}
+\end{equation}
+
+
+\section{Campo Magnético Generado}
+Al circular corriente por la bobina, esta genera su propio campo magnético. Asumiendo que la bobina es plana y circular, la magnitud del campo magnético ($B_{bobina}$) en el centro de la misma se puede estimar mediante la Ley de Biot-Savart, multiplicada por el número de vueltas:
+\begin{equation}
+    B_{bobina} = \frac{\mu_0 \cdot N \cdot I}{D}
+\end{equation}
+
+Donde $\mu_0 = 4\pi \times 10^{-7} \, \text{T}\cdot\text{m/A}$ es la permeabilidad magnética del vacío. 
+
+
+\section{Fuerza Magnética y Torque de Arranque}
+El principio de funcionamiento del motor radica en la fuerza de Lorentz. Llamaremos $B_{magnetico}$ a la inducción magnética perpendicular producida por el imán de neodimio. 
+
+El par motor o torque magnético ($\tau$) que experimenta la espira de área $A_{espira}$ está dado por:
+\begin{equation}
+    \tau = N \cdot I \cdot A_{espira} \cdot B_{magnetico} \cdot \sin(\theta)
+\end{equation}
+
+Donde $\theta$ es el ángulo entre el vector normal al área de la espira y el campo magnético exterior. El \textbf{torque de arranque} se aplica cuando la bobina está paralela a las líneas de campo del imán (circuito estático, $\theta = 90^\circ$, $\sin(\theta) = 1$). El área geométrica es:
+\begin{equation*}
+    A_{espira} = \pi \cdot \left(\frac{D}{2}\right)^2 
+\end{equation*}
+
+\end{document}
